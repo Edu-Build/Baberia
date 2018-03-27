@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Barberia.Models
+namespace Barberia.Areas.Admin.Models
 {
+  
     public class ExternalLoginConfirmationViewModel
     {
         [Required]
@@ -109,4 +110,5 @@ namespace Barberia.Models
         [Display(Name = "Email")]
         public string Email { get; set; }
     }
+
 }

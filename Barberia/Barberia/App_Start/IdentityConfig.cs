@@ -10,7 +10,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
-using Barberia.Models;
+using Barberia.Areas.Admin.Models;
 
 namespace Barberia
 {

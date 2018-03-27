@@ -6,10 +6,11 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using Barberia.Models;
+using Barberia.Areas.Admin.Models;
 
-namespace Barberia.Controllers
+namespace Barberia.Areas.Admin.Controllers
 {
+   
     [Authorize]
     public class ManageController : Controller
     {
@@ -32,9 +33,9 @@ namespace Barberia.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -333,7 +334,7 @@ namespace Barberia.Controllers
             base.Dispose(disposing);
         }
 
-#region Helpers
+        #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
 
@@ -384,6 +385,6 @@ namespace Barberia.Controllers
             Error
         }
 
-#endregion
+        #endregion
     }
 }
