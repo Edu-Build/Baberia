@@ -212,6 +212,10 @@
     <Compile Include="Areas\Admin\Models\AccountViewModels.cs" />
     <Compile Include="Areas\Admin\Models\IdentityModels.cs" />
     <Compile Include="Areas\Admin\Models\ManagerViewModels.cs" />
+    <Compile Include="Areas\ApiRest\ApiRestAreaRegistration.cs" />
+    <Compile Include="Areas\ApiRest\Controllers\CustomersController.cs" />
+    <Compile Include="Areas\ApiRest\Models\CustomersModel.cs" />
+    <Compile Include="Areas\ApiRest\Models\ManagerCustomers.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -258,6 +262,7 @@
     <Content Include="Areas\Admin\Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\Error.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\Lockout.cshtml" />
+    <Content Include="Areas\ApiRest\Views\web.config" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -286,6 +291,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\ApiRest\Views\Customers\" />
+    <Folder Include="Areas\ApiRest\Views\Shared\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
