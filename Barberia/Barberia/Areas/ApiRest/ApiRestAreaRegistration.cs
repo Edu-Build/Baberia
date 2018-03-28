@@ -14,20 +14,33 @@ namespace Barberia.Areas.ApiRest
 
         public override void RegisterArea(AreaRegistrationContext context) 
         {
-            /*Acciones Rest*/
+            /*Acciones Rest Cliente*/
             context.MapRoute(
                 "accessCustomer",
                 "Api/Clientes/Cliente/{id}",
-                new { controller = "Customers", action = "Customers", id = UrlParameter.Optional }
+                new { controller = "Customers", action = "Customer", id = UrlParameter.Optional }
             );
 
-            /*Listado*/
+            /*Listado Cliente*/
             context.MapRoute(
                 "accessCustomers",
                 "Api/Clientes",
-                new { controller = "Customers", action = "Customer" }
+                new { controller = "Customers", action = "Customers" }
             );
 
+             /*Acciones Rest Tiendas*/
+            context.MapRoute(
+                "accessStoreCatalog",
+                "Api/Catalogo/Tienda/{id}",
+                new { controller = "StoreCatalog", action = "Store", id = UrlParameter.Optional }
+            );
+
+            /*Listado de Tiendas*/
+            context.MapRoute(
+                "accessStoresCatalog",
+                "Api/Catalogo",
+                new { controller = "StoreCatalog", action = "Stores" }
+            );
 
             context.MapRoute(
                 "Api_default",

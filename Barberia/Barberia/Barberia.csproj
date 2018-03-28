@@ -214,8 +214,11 @@
     <Compile Include="Areas\Admin\Models\ManagerViewModels.cs" />
     <Compile Include="Areas\ApiRest\ApiRestAreaRegistration.cs" />
     <Compile Include="Areas\ApiRest\Controllers\CustomersController.cs" />
+    <Compile Include="Areas\ApiRest\Controllers\StoreCatalogController.cs" />
     <Compile Include="Areas\ApiRest\Models\CustomersModel.cs" />
     <Compile Include="Areas\ApiRest\Models\ManagerCustomers.cs" />
+    <Compile Include="Areas\ApiRest\Models\ManagerStoreCatalog.cs" />
+    <Compile Include="Areas\ApiRest\Models\StoreCatalogModel.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -293,6 +296,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\ApiRest\Views\Customers\" />
     <Folder Include="Areas\ApiRest\Views\Shared\" />
+    <Folder Include="Areas\ApiRest\Views\StoreCatalog\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

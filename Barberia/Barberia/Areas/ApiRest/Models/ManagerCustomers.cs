@@ -13,7 +13,7 @@ namespace Barberia.Areas.ApiRest.Models
 
         public bool createCustomer(CustomersModel customer)
         {
-            var resultado = new respuesta();
+           
             string query = "INSERT INTO customers VALUES(@id,@email,@name,@firstName,@lastName,@cellPhone,@homePhone)";
             SqlConnection conn = new SqlConnection(cadena);
             SqlCommand cmd = new SqlCommand(query, conn);
@@ -191,10 +191,5 @@ namespace Barberia.Areas.ApiRest.Models
         }
 
 
-        public class respuesta
-        {
-            public bool ok { get; set; }
-            public string mensaje { get; set; }
-        }
     }
 }
