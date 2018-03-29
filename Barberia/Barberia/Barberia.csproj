@@ -214,11 +214,24 @@
     <Compile Include="Areas\Admin\Models\ManagerViewModels.cs" />
     <Compile Include="Areas\ApiRest\ApiRestAreaRegistration.cs" />
     <Compile Include="Areas\ApiRest\Controllers\CustomersController.cs" />
+    <Compile Include="Areas\ApiRest\Controllers\EmployeesController.cs" />
+    <Compile Include="Areas\ApiRest\Controllers\ReservationsController.cs" />
+    <Compile Include="Areas\ApiRest\Controllers\ServicesCatalogController.cs" />
     <Compile Include="Areas\ApiRest\Controllers\StoreCatalogController.cs" />
+    <Compile Include="Areas\ApiRest\Controllers\UsersController.cs" />
     <Compile Include="Areas\ApiRest\Models\CustomersModel.cs" />
+    <Compile Include="Areas\ApiRest\Models\EmployeesModel.cs" />
     <Compile Include="Areas\ApiRest\Models\ManagerCustomers.cs" />
+    <Compile Include="Areas\ApiRest\Models\ManagerEmployees.cs" />
+    <Compile Include="Areas\ApiRest\Models\ManagerReservations.cs" />
+    <Compile Include="Areas\ApiRest\Models\ManagerServicesCatalog.cs" />
     <Compile Include="Areas\ApiRest\Models\ManagerStoreCatalog.cs" />
+    <Compile Include="Areas\ApiRest\Models\ManagerUsers.cs" />
+    <Compile Include="Areas\ApiRest\Models\ReservationsJoinModel.cs" />
+    <Compile Include="Areas\ApiRest\Models\ReservationsModel.cs" />
+    <Compile Include="Areas\ApiRest\Models\ServicesCatalogModel.cs" />
     <Compile Include="Areas\ApiRest\Models\StoreCatalogModel.cs" />
+    <Compile Include="Areas\ApiRest\Models\UsersModel.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -295,8 +308,12 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\ApiRest\Views\Customers\" />
+    <Folder Include="Areas\ApiRest\Views\Employees\" />
+    <Folder Include="Areas\ApiRest\Views\Reservations\" />
+    <Folder Include="Areas\ApiRest\Views\ServicesCatalog\" />
     <Folder Include="Areas\ApiRest\Views\Shared\" />
     <Folder Include="Areas\ApiRest\Views\StoreCatalog\" />
+    <Folder Include="Areas\ApiRest\Views\Users\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>

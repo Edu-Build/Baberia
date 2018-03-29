@@ -14,6 +14,37 @@ namespace Barberia.Areas.ApiRest
 
         public override void RegisterArea(AreaRegistrationContext context) 
         {
+
+
+            /*Acciones Rest empleado*/
+            context.MapRoute(
+                "accessEmploye",
+                "Api/CatEmpleados/Empleado/{id}",
+                new { controller = "Employees", action = "Employe", id = UrlParameter.Optional }
+            );
+
+            /*Listado Empleados*/
+            context.MapRoute(
+                "accessEmployees",
+                "Api/CatEmpleados",
+                new { controller = "Employees", action = "Employees" }
+            );
+
+
+            /*Acciones Rest reservacion*/
+            context.MapRoute(
+                "accessReservation",
+                "Api/CatReservaciones/Reservacion/{id}",
+                new { controller = "Reservations", action = "Reservation", id = UrlParameter.Optional }
+            );
+
+            /*Listado Reservaciones*/
+            context.MapRoute(
+                "accessReservations",
+                "Api/CatReservaciones",
+                new { controller = "Reservations", action = "Reservations" }
+            );
+
             /*Acciones Rest Cliente*/
             context.MapRoute(
                 "accessCustomer",
@@ -31,15 +62,29 @@ namespace Barberia.Areas.ApiRest
              /*Acciones Rest Tiendas*/
             context.MapRoute(
                 "accessStoreCatalog",
-                "Api/Catalogo/Tienda/{id}",
+                "Api/CatalogoTienda/Tienda/{id}",
                 new { controller = "StoreCatalog", action = "Store", id = UrlParameter.Optional }
             );
 
             /*Listado de Tiendas*/
             context.MapRoute(
                 "accessStoresCatalog",
-                "Api/Catalogo",
+                "Api/CatalogoTienda",
                 new { controller = "StoreCatalog", action = "Stores" }
+            );
+
+            /*Acciones Rest Servicios*/
+            context.MapRoute(
+                "accessService",
+                "Api/CatalogoServicio/Servicio/{id}",
+                new { controller = "ServicesCatalog", action = "Service", id = UrlParameter.Optional }
+            );
+
+            /*Listado Servicios*/
+            context.MapRoute(
+                "accessServices",
+                "Api/CatalogoServicio",
+                new { controller = "ServicesCatalog", action = "Services" }
             );
 
             context.MapRoute(
