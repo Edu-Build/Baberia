@@ -22,7 +22,7 @@ namespace Barberia.Areas.ApiRest.Controllers
 
         /*Retornamos los clientes en formato Json*/
         [HttpGet]
-        public JsonResult Users()
+        public JsonResult UserList()
         {
 
             return Json(new { data = user.allUsers() }, JsonRequestBehavior.AllowGet);
@@ -30,18 +30,16 @@ namespace Barberia.Areas.ApiRest.Controllers
         }
 
         /*Action JsonResult que con un condional Case evaluara que metodo se ejecutara dependiendo de la Peticion del cliente*/
-        public JsonResult User(int? id, UsersModel item)
+        public JsonResult Users(string id, UsersModel item)
         {
             switch (Request.HttpMethod)
             {
-                case "POST":
-                    return Json(user.createUser(item));
                 case "PUT":
                     return Json(user.updateUser(item));
                 case "GET":
-                    return Json(user.returnUser(id.GetValueOrDefault()), JsonRequestBehavior.AllowGet);
+                    return Json(user.returnUser(id.ToString()), JsonRequestBehavior.AllowGet);
                 case "DELETE":
-                    return Json(user.deleteUser(id.GetValueOrDefault()));
+                    return Json(user.deleteUser(id.ToString()));
             }
 
             return Json(new { Error = true, Message = "Operacion HTTP desconocida" });

@@ -231,6 +231,7 @@
     <Compile Include="Areas\ApiRest\Models\ReservationsModel.cs" />
     <Compile Include="Areas\ApiRest\Models\ServicesCatalogModel.cs" />
     <Compile Include="Areas\ApiRest\Models\StoreCatalogModel.cs" />
+    <Compile Include="Areas\ApiRest\Models\UsersJoinModel.cs" />
     <Compile Include="Areas\ApiRest\Models\UsersModel.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">

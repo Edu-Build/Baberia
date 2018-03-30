@@ -18,6 +18,20 @@ namespace Barberia.Areas.ApiRest
 
             /*Acciones Rest empleado*/
             context.MapRoute(
+                "accessUsers",
+                "Api/CatUsuarios/Usuario/{id}",
+                new { controller = "Users", action = "Users", id = UrlParameter.Optional }
+            );
+
+            /*Listado Usuarios*/
+            context.MapRoute(
+                "accessListUsers",
+                "Api/CatUsuarios",
+                new { controller = "Users", action = "UserList" }
+            );
+
+            /*Acciones Rest empleado*/
+            context.MapRoute(
                 "accessEmploye",
                 "Api/CatEmpleados/Empleado/{id}",
                 new { controller = "Employees", action = "Employe", id = UrlParameter.Optional }

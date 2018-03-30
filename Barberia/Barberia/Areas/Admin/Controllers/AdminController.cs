@@ -8,7 +8,7 @@ namespace Barberia.Areas.Admin.Controllers
 {
     public class AdminController : Controller
     {
-        // GET: Admin/Admin
+        [Authorize]
         public ActionResult Index()
         {
             return View();
