@@ -11,7 +11,7 @@ namespace Barberia.Areas.ApiRest.Models
         public int id { get; set; }
         public string name { get; set; }
         public string type { get; set; }
-        public string descriptionS { get; set; }
+        public string description { get; set; }
         public decimal price { get; set; }
     }
 }

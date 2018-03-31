@@ -11,7 +11,7 @@ namespace Barberia.Areas.ApiRest.Models
         public string name { get; set; }
         public string state { get; set; }
         public string town { get; set; }
-        public string addressSt { get; set; }
+        public string address { get; set; }
         public string phone { get; set; }
     }
 }

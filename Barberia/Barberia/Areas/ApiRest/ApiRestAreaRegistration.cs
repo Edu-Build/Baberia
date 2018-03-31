@@ -59,47 +59,57 @@ namespace Barberia.Areas.ApiRest
                 new { controller = "Reservations", action = "Reservations" }
             );
 
-            /*Acciones Rest Cliente*/
+
+            /*Actualizacion proceso reervacion*/
             context.MapRoute(
-                "accessCustomer",
-                "Api/Clientes/Cliente/{id}",
-                new { controller = "Customers", action = "Customer", id = UrlParameter.Optional }
+                "accessActReservacion",
+                "Api/Actualizar/Proceso/{id}",
+                new { controller = "Reservations", action = "ProcessUpdate", id = UrlParameter.Optional }
             );
 
-            /*Listado Cliente*/
-            context.MapRoute(
-                "accessCustomers",
-                "Api/Clientes",
-                new { controller = "Customers", action = "Customers" }
-            );
 
-             /*Acciones Rest Tiendas*/
+            /*Acciones Rest Tiendas*/
             context.MapRoute(
                 "accessStoreCatalog",
-                "Api/CatalogoTienda/Tienda/{id}",
+                "Api/CatTienda/Tienda/{id}",
                 new { controller = "StoreCatalog", action = "Store", id = UrlParameter.Optional }
             );
 
             /*Listado de Tiendas*/
             context.MapRoute(
                 "accessStoresCatalog",
-                "Api/CatalogoTienda",
+                "Api/CatTienda",
                 new { controller = "StoreCatalog", action = "Stores" }
+            );
+
+            /*Combo Tienda*/
+            context.MapRoute(
+                "accessComboStore",
+                "Api/ComTienda",
+                new { controller = "ComboStore", action = "Stores" }
             );
 
             /*Acciones Rest Servicios*/
             context.MapRoute(
                 "accessService",
-                "Api/CatalogoServicio/Servicio/{id}",
+                "Api/CatServicio/Servicio/{id}",
                 new { controller = "ServicesCatalog", action = "Service", id = UrlParameter.Optional }
             );
 
             /*Listado Servicios*/
             context.MapRoute(
                 "accessServices",
-                "Api/CatalogoServicio",
+                "Api/CatServicio",
                 new { controller = "ServicesCatalog", action = "Services" }
             );
+
+            /*Combo Servicios*/
+            context.MapRoute(
+                "accessComboService",
+                "Api/ComServicio",
+                new { controller = "ComboService", action = "Services" }
+            );
+
 
             context.MapRoute(
                 "Api_default",

@@ -13,17 +13,18 @@ namespace Barberia.Controllers
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult Service()
         {
-            ViewBag.Message = "Your application description page.";
-
             return View();
         }
 
-        public ActionResult Contact()
+        public ActionResult Stores()
         {
-            ViewBag.Message = "Your contact page.";
+            return View();
+        }
 
+        public ActionResult About()
+        {
             return View();
         }
     }

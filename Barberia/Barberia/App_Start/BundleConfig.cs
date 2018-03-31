@@ -24,8 +24,20 @@ namespace Barberia
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/bootstrap.css"));
+
+
+            //Referencia de mis estilos y scripts 
+
+            bundles.Add(new StyleBundle("~/MisEstilos/css").Include(
+                         "~/MisEstilos/misEstilos.css",
+                         "~/MisEstilos/Style.css",
+                         "~/MisEstilos/Calendario.css"));
+
+            bundles.Add(new StyleBundle("~/MisScripts/calendario").Include(
+                          "~/MisScripts/Calendario.min.js"));
         }
+
+       
     }
 }

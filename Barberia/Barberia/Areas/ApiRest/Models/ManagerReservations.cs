@@ -13,20 +13,20 @@ namespace Barberia.Areas.ApiRest.Models
         public bool createReservations(ReservationsModel reservation)
         {
 
-            string query = "INSERT INTO reservations VALUES(@id,@idCustomer,@idService,@idStore,@createReservation,@dataReservation,@process)";
+            string query = "INSERT INTO reservations VALUES  (@idService,@idStore,@email,@name,@nameFL,GETDATE(),@reservation,DEFAULT);";
             SqlConnection conn = new SqlConnection(cadena);
             SqlCommand cmd = new SqlCommand(query, conn);
 
             try
             {
                 conn.Open();
-                cmd.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = reservation.id;
-                cmd.Parameters.Add("@idCustomer", System.Data.SqlDbType.Int).Value = reservation.idCustomer;
                 cmd.Parameters.Add("@idService", System.Data.SqlDbType.Int).Value = reservation.idService;
                 cmd.Parameters.Add("@idStore", System.Data.SqlDbType.Int).Value = reservation.idStore;
-                cmd.Parameters.Add("@createReservation", System.Data.SqlDbType.Date).Value = reservation.createReservation;
-                cmd.Parameters.Add("@dataReservation", System.Data.SqlDbType.Date).Value = reservation.dataReservation;
-                cmd.Parameters.Add("@process", System.Data.SqlDbType.VarChar).Value = reservation.process;
+                cmd.Parameters.Add("@email", System.Data.SqlDbType.VarChar).Value = reservation.email;
+                cmd.Parameters.Add("@name", System.Data.SqlDbType.VarChar).Value = reservation.name;
+                cmd.Parameters.Add("@nameFL", System.Data.SqlDbType.VarChar).Value = reservation.nameFL;
+                cmd.Parameters.Add("@reservation", System.Data.SqlDbType.VarChar).Value = reservation.reservation;
+     
 
                 int register = cmd.ExecuteNonQuery();
                 return (register == 1);
@@ -46,7 +46,7 @@ namespace Barberia.Areas.ApiRest.Models
 
         public bool updateReservations(ReservationsModel reservation)
         {
-            string query = "UPDATE reservation SET dateTime_reservation = @dataReservation, process = @process id = @id";
+            string query = "UPDATE reservations SET idService = @idService, idStore = @idStore, email = @email, name = @name, FLname = @nameFL, reservation = @reservation WHERE id = @id";
             SqlConnection conn = new SqlConnection(cadena);
             SqlCommand cmd = new SqlCommand(query, conn);
 
@@ -54,9 +54,12 @@ namespace Barberia.Areas.ApiRest.Models
             {
                 conn.Open();
                 cmd.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = reservation.id;
-                cmd.Parameters.Add("@createReservation", System.Data.SqlDbType.Date).Value = reservation.createReservation;
-                cmd.Parameters.Add("@dataReservation", System.Data.SqlDbType.Date).Value = reservation.dataReservation;
-                cmd.Parameters.Add("@process", System.Data.SqlDbType.VarChar).Value = reservation.process;
+                cmd.Parameters.Add("@idService", System.Data.SqlDbType.Int).Value = reservation.idService;
+                cmd.Parameters.Add("@idStore", System.Data.SqlDbType.Int).Value = reservation.idStore;
+                cmd.Parameters.Add("@email", System.Data.SqlDbType.VarChar).Value = reservation.email;
+                cmd.Parameters.Add("@name", System.Data.SqlDbType.VarChar).Value = reservation.name;
+                cmd.Parameters.Add("@nameFL", System.Data.SqlDbType.VarChar).Value = reservation.nameFL;
+                cmd.Parameters.Add("@reservation", System.Data.SqlDbType.VarChar).Value = reservation.reservation;
 
                 int register = cmd.ExecuteNonQuery();
 
@@ -72,92 +75,31 @@ namespace Barberia.Areas.ApiRest.Models
             }
         }
 
-        public ReservationsJoinModel returnReservation(int id)
+        public bool updateReservationProcess(int id)
         {
-            string query = "SELECT r.id,  c.name +' '+ c.last_name +' '+ c.firts_name, s.name, t.name, CONVERT(VARCHAR, r.dateTime_day),CONVERT(VARCHAR,r.dateTime_reservation) , r.process FROM reservations r, customers c, storeCatalog t, servicesCatalog s WHERE r.idCustomer = c.id  AND   r.idService = s.id and   r.idStore = t.id AND r.id = @id";
+            string query = "UPDATE reservations SET process = 'REALIZADA' WHERE id = @id";
             SqlConnection conn = new SqlConnection(cadena);
             SqlCommand cmd = new SqlCommand(query, conn);
-            ReservationsJoinModel reservation = new ReservationsJoinModel();
-        
 
             try
             {
                 conn.Open();
                 cmd.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = id;
-                SqlDataReader dr = cmd.ExecuteReader();
                 
 
-                if (dr.Read())
-                {
+                int register = cmd.ExecuteNonQuery();
 
-                    reservation.id = dr.GetInt32(0);
-                    reservation.name = dr.GetString(1);
-                    reservation.service = dr.GetString(2);
-                    reservation.store = dr.GetString(3);
-                    reservation.createReservation = dr.GetString(4);
-                    reservation.dataReservation = dr.GetString(5);
-                    reservation.process = dr.GetString(6);
-                }
-
-
+                return (register == 1);
             }
             catch (Exception)
             {
-
+                return false;
             }
             finally
             {
                 conn.Close();
             }
-            return reservation;
         }
-
-
-        public List<ReservationsJoinModel> allReservations()
-        {
-            string query = "SELECT r.id,  c.name +' '+ c.last_name +' '+ c.firts_name, s.name, t.name, CONVERT(VARCHAR,r.dateTime_day), CONVERT(VARCHAR,r.dateTime_reservation),r.process FROM reservations r, customers c, storeCatalog t, servicesCatalog s WHERE r.idCustomer = c.id  AND   r.idService = s.id and   r.idStore = t.id ";
-            SqlConnection conn = new SqlConnection(cadena);
-            SqlCommand cmd = new SqlCommand(query, conn);
-            List<ReservationsJoinModel> reservation = new List<ReservationsJoinModel>();
-
-            try
-            {
-                conn.Open();
-                SqlDataReader dr = cmd.ExecuteReader();
-
-
-                while (dr.Read())
-                {
-
-
-                    reservation.Add(new ReservationsJoinModel
-                    {
-
-                        id = dr.GetInt32(0),
-                        name = dr.GetString(1),
-                        service = dr.GetString(2),
-                        store = dr.GetString(3),
-                        createReservation = dr.GetString(4),
-                        dataReservation = dr.GetString(5),
-                        process = dr.GetString(6)
-
-
-                    });
-
-                }
-
-            }
-            catch (Exception)
-            {
-
-            }
-            finally
-            {
-                conn.Close();
-            }
-            return reservation;
-        }
-
 
         public bool deleteReservations(int id)
         {
@@ -187,5 +129,98 @@ namespace Barberia.Areas.ApiRest.Models
             }
 
         }
+
+        public ReservationsModel returnReservation(int id)
+        {
+            string query = "SELECT id, idService, idStore, email, name, flName, reservation FROM reservations WHERE id = @id";
+            SqlConnection conn = new SqlConnection(cadena);
+            SqlCommand cmd = new SqlCommand(query, conn);
+            ReservationsModel reservation = new ReservationsModel();
+
+
+            try
+            {
+                conn.Open();
+                cmd.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = id;
+                SqlDataReader dr = cmd.ExecuteReader();
+
+
+                if (dr.Read())
+                {
+
+                    reservation.id = dr.GetInt32(0);
+                    reservation.idService = dr.GetInt32(1);
+                    reservation.idStore = dr.GetInt32(2);
+                    reservation.email = dr.GetString(3);
+                    reservation.name = dr.GetString(4);
+                    reservation.nameFL = dr.GetString(5);
+                    reservation.reservation = dr.GetString(6);
+
+                }
+
+
+            }
+            catch (Exception)
+            {
+
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return reservation;
+        }
+
+
+        /*Modelos Con Join*/
+        public List<ReservationsJoinModel> allReservations()
+        {
+            string query = "SELECT R.id, S.name, T.name, R.email, R.name, R.flName, CONVERT(VARCHAR(10), R.dateReservation, 103), R.reservation, R.process FROM reservations R, serviceSCatalog S, storeCatalog T  WHERE R.idService = S.id  AND R.idStore = T.id";
+            SqlConnection conn = new SqlConnection(cadena);
+            SqlCommand cmd = new SqlCommand(query, conn);
+            List<ReservationsJoinModel> reservation = new List<ReservationsJoinModel>();
+
+            try
+            {
+                conn.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+
+
+                while (dr.Read())
+                {
+
+
+                    reservation.Add(new ReservationsJoinModel
+                    {
+
+                        id = dr.GetInt32(0),
+                        nameService = dr.GetString(1),
+                        nameStore = dr.GetString(2),
+                        email = dr.GetString(3),
+                        name = dr.GetString(4),
+                        nameFL = dr.GetString(5),
+                        dateReservation= dr.GetString(6),
+                        reservation = dr.GetString(7),
+                        process = dr.GetString(8)
+
+
+                    });
+
+                }
+
+            }
+            catch (Exception)
+            {
+
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return reservation;
+        }
+
+
+
     }
 }

@@ -19,7 +19,7 @@ namespace Barberia.Areas.ApiRest.Controllers
             reservations = new ManagerReservations();
         }
 
-
+        
         /*Retornamos los clientes en formato Json*/
         [HttpGet]
         public JsonResult Reservations()
@@ -28,6 +28,16 @@ namespace Barberia.Areas.ApiRest.Controllers
             return Json(new { data = reservations.allReservations() }, JsonRequestBehavior.AllowGet);
 
         }
+
+
+        /*Accion que me actualiza el proceso de mi Reservacion*/
+        [HttpPut]
+        public JsonResult ProcessUpdate(int id)
+        {
+            return Json(reservations.updateReservationProcess(id));
+        }
+
+
 
         /*Action JsonResult que con un condional Case evaluara que metodo se ejecutara dependiendo de la Peticion del cliente*/
         public JsonResult Reservation(int? id, ReservationsModel item)

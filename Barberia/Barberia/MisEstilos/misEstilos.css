@@ -1,0 +1,56 @@
+﻿
+.container-fluid{
+    padding: 0;
+}
+
+nav,footer{
+    background-color:black;
+}
+
+
+.navbar-brand{
+    background: white;
+    border-radius: 40%;
+}
+
+
+.nav-item{
+    font-size: 1.2rem;
+}
+
+.logo-svg{
+    width: 200px;
+    color: white;
+}
+
+.fondo{
+    background-color: #eee;
+}
+
+section{
+    height: 1000px;
+    width: 80%;
+    margin: auto;
+    background: green;
+}
+
+.card{
+    border: 1px dashed #f5183b;  
+}
+
+.ver-mas{
+    height: 100%;
+    float: right;
+}
+
+.footer-copyright{
+    font-size: 1.3rem;
+    color:white;
+}
+
+
+.relleno {
+    height: 500px;
+    width: 100%;
+    background: transparent;
+}

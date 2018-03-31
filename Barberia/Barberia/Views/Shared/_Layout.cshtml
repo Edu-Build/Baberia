@@ -3,42 +3,233 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>Barberia The Pepe's Store</title>
     @Styles.Render("~/Content/css")
+    @Styles.Render("~/MisEstilos/css")
     @Scripts.Render("~/bundles/modernizr")
+    <link href="~/MisEstilos/jquery.timepicker.css" rel="stylesheet" />
+
+    <link href="https://cdn.jsdelivr.net/npm/gijgo@1.9.4/combined/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+
+
+
 
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+    <!--Navegacion-->
+
+    <nav class="navbar navbar-dark navbar-expand-md sticky-top">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="~/Home/Index">
+            <img src="Images/Logo.svg" class="d-inline-block logo-svg align-top" alt="Logo Bootstrap">
+        </a>
+        <div class="collapse navbar-collapse" id="navbarToggleExternalContent">
+            <div class="navbar-nav ml-auto  mr-auto text-center">
+                <a class="nav-item nav-link color active" href="~/Home/Index">Inicio</a>
+                <a class="nav-item nav-link" href="~/Home/Service">Servicios</a>
+                <a class="nav-item nav-link" href="~/Home/Stores">Sucursal</a>
+                <a class="nav-item nav-link" href="~/Home/About">Nosotros</a>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-                
+            <div class="d-flex flex-row justify-content-center">
+                <span class="icon-facebook mr-4"></span>
+                <span class="icon-youtube"></span>
+            </div>
+
+        </div>
+    </nav>
+    <!--Termina Barra de Navegacion-->
+
+
+    @RenderBody()
+
+    <hr />
+
+    <!--Footer-->
+    <footer class="page-footer font-small stylish-color-dark pt-4 mt-4 ">
+        <!--Social buttons-->
+        <div class="text-center">
+            <ul class="list-unstyled list-inline">
+                <li class="list-inline-item"><a href="#"><span class="icon-facebook"></span></a></li>
+                <li class="list-inline-item"><a href="#"><span class="icon-twitter"></span></a></li>
+                <li class="list-inline-item"><a href="#"><span class="icon-youtube"></span></a></li>
+                <li class="list-inline-item"><a href="#"><span class="icon-instagram"></span></a></li>
+            </ul>
+        </div>
+        <!--/.Social buttons-->
+        <div class="footer-copyright py-3 text-center">
+            <div class="container-fluid">
+                © 2018 Copyright: Aplicaciones Distribuidas
             </div>
         </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
+    </footer>
+    <!--/ Termina Footer-->
+
+
+
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/MisScripts/calendario")
     @RenderSection("scripts", required: false)
+
+
+    <script src="~/MisScripts/jquery.timepicker.js"></script>
+
+    
+
+
+
+    <script>
+
+    $(document).ready(function () {
+
+
+           $('#rDate').datepicker({
+               uiLibrary: 'bootstrap4',
+               format: 'dd/mm/yyyy',
+               todayBtn: "linked",
+               language: "es"
+           })
+           $("#rHour").timepicker({
+               template: 'modal',
+               timeFormat: 'hh:mm p',
+               interval: 60,
+               minTime: '10',
+               maxTime: '6:00pm',
+               startTime: '10:00',
+               dynamic: false,
+               dropdown: true,
+               scrollbar: true
+           })
+           $('#btnReservar').on('click', function () {
+
+               var reservation = new Object()
+             
+               reservation.idService = $('#rService').val()
+               reservation.idStore = $('#rStore').val()
+               reservation.email = $('#rEmail').val()
+               reservation.name = $('#rName').val()
+               reservation.ltName = $('#rFLName').val()
+               reservation.reservation = $('#rDate').val() + ' ' + $('#rHour').val()
+
+               console.log(reservation)
+               //createRervation(JSON.stringify(reservation))
+           })
+           comboService()
+
+          
+
+    })
+
+   
+        
+
+    /*Creacion de Reservacion*/
+    function createReservation(reservation) {
+        var value = " "
+
+        $.ajax({
+
+            url: "../../Api/CatReservaciones/Reservacion",
+            cache: false,
+            type: "POST",
+            contentType: "application/json; charset= utf-8",
+            data: reservation,
+            dataType: "json",
+            statusCode: {
+                200: function () {
+                    alert("Su Reservacion ha sido exitosa por favor Revise su correo")
+                    location.reload()
+                },
+                400: function () {
+
+                    alert("Su Reservacion no pudo realizar con exito")
+                    location.reload()
+
+                }
+            }
+        })
+    }
+
+
+
+        /*Combo Servicios*/
+
+    function comboService() {
+
+        $.ajax({
+
+            url: '../../Api/ComServicio',
+            type: 'GET',
+            dataType: 'application/json; charset= utf-8',
+            success: function (data) {
+
+                var service = $("#rService")
+                var datos = data
+                $(datos).each(function (key, item) {
+
+                    service.append('<option value=' + item.idService + '>' + item.name + '</option>' )
+                })
+            }
+
+        })
+
+    }
+
+
+/*
+     function comboService() {
+        var url = "../../Api/ComServicio"
+        var value = ""
+       
+        $.getJson(url, function (data) {
+            $.each(data, function (key, item) {
+
+                
+                value = '<option value='+ item.idService +'> '+ item.name +'</option>'
+            })
+            $('#rService option').append(value)
+        })
+        
+        
+    }*/
+
+
+
+        /*Catalogo de clientes
+
+        //Esta funcion fue sustituida para poder utlizar los atributos de DataTable
+       
+        function allCustomers() {         
+            var no = 1
+            var url = "../../Api/Clientes"
+            var value = ""
+           $.getJSON(url, function (data) {
+               $.each(data, function (key, item) {
+
+                   value += "<tr><td>" + no++
+                       + "</td><td id='idr'>" + item.id
+                       + "</td><td>" + item.email
+                       + "</td><td>" + item.name 
+                       + "</td><td>" + item.firstName
+                       + "</td><td>" + item.lastName
+                       + "</td><td>" + item.cellPhone
+                       + "</td><td>" + item.homePhone
+                       + "</td><td> <button class='btn btn-danger btnEliminar' style='margin-right: 5px;'>Eliminar</button>"
+                       + "<button class='btn btn-warning btnActualizar' onclick ='actualizar()'>Modificar</button></td></tr>"
+                          
+               })
+          
+               $("#listCustomers tbody").append(value)
+           })
+           
+       }*/
+
+
+
+
+    </script>
 </body>
 </html>

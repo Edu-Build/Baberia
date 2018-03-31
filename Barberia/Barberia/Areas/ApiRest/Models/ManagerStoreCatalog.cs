@@ -12,7 +12,7 @@ namespace Barberia.Areas.ApiRest.Models
 
         public  bool createStore(StoreCatalogModel store) {
 
-            string query = "INSERT INTO storeCatalog VALUES(@name,@state,@town,@addressSt,@phone)";
+            string query = "INSERT INTO storeCatalog VALUES(@name,@state,@town,@address,@phone)";
             SqlConnection conn = new SqlConnection(cadena);
             SqlCommand cmd = new SqlCommand(query, conn);
 
@@ -22,7 +22,7 @@ namespace Barberia.Areas.ApiRest.Models
                 cmd.Parameters.Add("@name", System.Data.SqlDbType.VarChar).Value = store.name;
                 cmd.Parameters.Add("@state", System.Data.SqlDbType.VarChar).Value = store.state;
                 cmd.Parameters.Add("@town", System.Data.SqlDbType.VarChar).Value = store.town;
-                cmd.Parameters.Add("@addressSt", System.Data.SqlDbType.VarChar).Value = store.addressSt;
+                cmd.Parameters.Add("@address", System.Data.SqlDbType.VarChar).Value = store.address;
                 cmd.Parameters.Add("@phone", System.Data.SqlDbType.VarChar).Value = store.phone;
                 
 
@@ -44,7 +44,7 @@ namespace Barberia.Areas.ApiRest.Models
         public  bool updateStore(StoreCatalogModel store) {
 
 
-            string query = "UPDATE storeCatalog SET  name = @name, state = @state, town = @town, addressSt = @addressSt, phone = @phone WHERE id = @id";
+            string query = "UPDATE storeCatalog SET  name = @name, state = @state, town = @town, addressSt = @address, phone = @phone WHERE id = @id";
             SqlConnection conn = new SqlConnection(cadena);
             SqlCommand cmd = new SqlCommand(query, conn);
 
@@ -55,7 +55,7 @@ namespace Barberia.Areas.ApiRest.Models
                 cmd.Parameters.Add("@name", System.Data.SqlDbType.VarChar).Value = store.name;
                 cmd.Parameters.Add("@state", System.Data.SqlDbType.VarChar).Value = store.state;
                 cmd.Parameters.Add("@town", System.Data.SqlDbType.VarChar).Value = store.town;
-                cmd.Parameters.Add("@addressSt", System.Data.SqlDbType.VarChar).Value = store.addressSt;
+                cmd.Parameters.Add("@address", System.Data.SqlDbType.VarChar).Value = store.address;
                 cmd.Parameters.Add("@phone", System.Data.SqlDbType.VarChar).Value = store.phone;
 
                 int register = cmd.ExecuteNonQuery();
@@ -93,7 +93,7 @@ namespace Barberia.Areas.ApiRest.Models
                     store.name = dr.GetString(1);
                     store.state = dr.GetString(2);
                     store.town = dr.GetString(3);
-                    store.addressSt = dr.GetString(4);
+                    store.address = dr.GetString(4);
                     store.phone = dr.GetString(5);
                     
                 }
@@ -136,7 +136,7 @@ namespace Barberia.Areas.ApiRest.Models
                         name = dr.GetString(1),
                         state = dr.GetString(2),
                         town = dr.GetString(3),
-                        addressSt = dr.GetString(4),
+                        address = dr.GetString(4),
                         phone = dr.GetString(5),
 
                 });

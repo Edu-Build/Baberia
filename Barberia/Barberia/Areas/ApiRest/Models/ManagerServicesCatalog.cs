@@ -13,17 +13,16 @@ namespace Barberia.Areas.ApiRest.Models
         public bool createService(ServicesCatalogModel service)
         {
             
-            string query = "INSERT INTO serviceCatalog VALUES(@id,@name,@type,@descriptionS,@price)";
+            string query = "INSERT INTO serviceCatalog VALUES(@name,@type,@description,@price)";
             SqlConnection conn = new SqlConnection(cadena);
             SqlCommand cmd = new SqlCommand(query, conn);
 
             try
             {
-                conn.Open();
-                cmd.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = service.id;
+                conn.Open();          
                 cmd.Parameters.Add("@name", System.Data.SqlDbType.VarChar).Value = service.name;
                 cmd.Parameters.Add("@type", System.Data.SqlDbType.VarChar).Value = service.type;
-                cmd.Parameters.Add("@descriptionS", System.Data.SqlDbType.VarChar).Value = service.descriptionS;
+                cmd.Parameters.Add("@description", System.Data.SqlDbType.VarChar).Value = service.description;
                 cmd.Parameters.Add("@price", System.Data.SqlDbType.Money).Value = service.price;
                 
 
@@ -47,7 +46,7 @@ namespace Barberia.Areas.ApiRest.Models
         {
 
 
-            string query = "UPDATE servicesCatalog SET   name = @name, type = @type, descriptionS = @descriptionS, price = @price WHERE id = @id";
+            string query = "UPDATE servicesCatalog SET   name = @name, type = @type, description_s = @descriptionS, price = @price WHERE id = @id";
             SqlConnection conn = new SqlConnection(cadena);
             SqlCommand cmd = new SqlCommand(query, conn);
 
@@ -57,7 +56,7 @@ namespace Barberia.Areas.ApiRest.Models
                 cmd.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = service.id;
                 cmd.Parameters.Add("@name", System.Data.SqlDbType.VarChar).Value = service.name;
                 cmd.Parameters.Add("@type", System.Data.SqlDbType.VarChar).Value = service.type;
-                cmd.Parameters.Add("@descriptionS", System.Data.SqlDbType.VarChar).Value = service.descriptionS;
+                cmd.Parameters.Add("@descriptionS", System.Data.SqlDbType.VarChar).Value = service.description;
                 cmd.Parameters.Add("@price", System.Data.SqlDbType.Money).Value = service.price;
 
                 int register = cmd.ExecuteNonQuery();
@@ -95,7 +94,7 @@ namespace Barberia.Areas.ApiRest.Models
                     service.id = dr.GetInt32(0);
                     service.name = dr.GetString(1);
                     service.type = dr.GetString(2);
-                    service.descriptionS = dr.GetString(3);
+                    service.description = dr.GetString(3);
                     service.price = dr.GetDecimal(4);
 
                 }
@@ -140,7 +139,7 @@ namespace Barberia.Areas.ApiRest.Models
                         id = dr.GetInt32(0),
                         name = dr.GetString(1),
                         type = dr.GetString(2),
-                        descriptionS = dr.GetString(3),
+                        description = dr.GetString(3),
                         price = dr.GetDecimal(4)
                     });
 
