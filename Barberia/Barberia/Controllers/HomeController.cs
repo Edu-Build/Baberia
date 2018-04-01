@@ -36,7 +36,7 @@ namespace Barberia.Controllers
             smtp.Port = 587;
             smtp.EnableSsl = true;
             smtp.Host = "outlook.office365.com";
-            smtp.Credentials = new NetworkCredential("eduardo.ibarra@my.unitec.edu.mx", "EduardoUnitec25");
+            smtp.Credentials = new NetworkCredential("eduardo.ibarra@my.unitec.edu.mx", "####");
             MailMessage mail = new MailMessage();
             mail.To.Add(e);
             mail.To.Add("edu.music.ei@gmail.com");
