@@ -25,7 +25,7 @@ namespace Barberia.Areas.ApiRest.Controllers
         public JsonResult Stores()
         {
 
-            return Json(new { data = store.ComboStore() }, JsonRequestBehavior.AllowGet);
+            return Json( store.ComboStore(), JsonRequestBehavior.AllowGet);
 
         }
     }

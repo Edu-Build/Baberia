@@ -13,7 +13,7 @@ namespace Barberia.Areas.ApiRest.Models
         public bool createReservations(ReservationsModel reservation)
         {
 
-            string query = "INSERT INTO reservations VALUES  (@idService,@idStore,@email,@name,@nameFL,GETDATE(),@reservation,DEFAULT);";
+            string query = "INSERT INTO reservations VALUES  (@idService,@idStore,@email,@name,@flName,GETDATE(),@reservation,DEFAULT)";
             SqlConnection conn = new SqlConnection(cadena);
             SqlCommand cmd = new SqlCommand(query, conn);
 
@@ -24,10 +24,9 @@ namespace Barberia.Areas.ApiRest.Models
                 cmd.Parameters.Add("@idStore", System.Data.SqlDbType.Int).Value = reservation.idStore;
                 cmd.Parameters.Add("@email", System.Data.SqlDbType.VarChar).Value = reservation.email;
                 cmd.Parameters.Add("@name", System.Data.SqlDbType.VarChar).Value = reservation.name;
-                cmd.Parameters.Add("@nameFL", System.Data.SqlDbType.VarChar).Value = reservation.nameFL;
+                cmd.Parameters.Add("@flName", System.Data.SqlDbType.VarChar).Value = reservation.flName;
                 cmd.Parameters.Add("@reservation", System.Data.SqlDbType.VarChar).Value = reservation.reservation;
-     
-
+               
                 int register = cmd.ExecuteNonQuery();
                 return (register == 1);
 
@@ -46,7 +45,7 @@ namespace Barberia.Areas.ApiRest.Models
 
         public bool updateReservations(ReservationsModel reservation)
         {
-            string query = "UPDATE reservations SET idService = @idService, idStore = @idStore, email = @email, name = @name, FLname = @nameFL, reservation = @reservation WHERE id = @id";
+            string query = "UPDATE reservations SET idService = @idService, idStore = @idStore, email = @email, name = @name, flName = @flName, reservation = @reservation WHERE id = @id";
             SqlConnection conn = new SqlConnection(cadena);
             SqlCommand cmd = new SqlCommand(query, conn);
 
@@ -58,7 +57,7 @@ namespace Barberia.Areas.ApiRest.Models
                 cmd.Parameters.Add("@idStore", System.Data.SqlDbType.Int).Value = reservation.idStore;
                 cmd.Parameters.Add("@email", System.Data.SqlDbType.VarChar).Value = reservation.email;
                 cmd.Parameters.Add("@name", System.Data.SqlDbType.VarChar).Value = reservation.name;
-                cmd.Parameters.Add("@nameFL", System.Data.SqlDbType.VarChar).Value = reservation.nameFL;
+                cmd.Parameters.Add("@flName", System.Data.SqlDbType.VarChar).Value = reservation.flName;
                 cmd.Parameters.Add("@reservation", System.Data.SqlDbType.VarChar).Value = reservation.reservation;
 
                 int register = cmd.ExecuteNonQuery();
@@ -148,12 +147,11 @@ namespace Barberia.Areas.ApiRest.Models
                 if (dr.Read())
                 {
 
-                    reservation.id = dr.GetInt32(0);
                     reservation.idService = dr.GetInt32(1);
                     reservation.idStore = dr.GetInt32(2);
                     reservation.email = dr.GetString(3);
                     reservation.name = dr.GetString(4);
-                    reservation.nameFL = dr.GetString(5);
+                    reservation.flName = dr.GetString(5);
                     reservation.reservation = dr.GetString(6);
 
                 }

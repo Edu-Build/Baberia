@@ -9,29 +9,27 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form enctype="application/x-www-form-urlencoded">
+                <form enctype="application/x-www-form-urlencoded" action="~/Home/Mail?e">
+                    <div class="form-group">
+                        <input name ="e" type="email" class="form-control" id="rEmail" placeholder="Email">
+                    </div>
                     <div class="form-group">
                         <input type="text" class="form-control" id="rName" placeholder="Nombre Cliente">
                     </div>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="rFLName" placeholder="Apellidos">
-                    </div>
-                    <div class="form-group">
-                        <input type="email" class="form-control" id="rEmail" placeholder="Email">
+                        <input type="text" class="form-control" id="rflName" placeholder="Apellidos">
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label>Servicio</label>
                             <select id="rService" class="form-control">
                                 <option selected>Elija servicio:</option>
-                                
                             </select>
                         </div>
                         <div class="form-group col-md-6">
                             <label>Sucursal</label>
                             <select id="rStore" class="form-control">
-                                <option value="0">Elija sucursal:</option>
-                                
+                                <option selected>Elija sucursal:</option>
                             </select>
                         </div>
                     </div>
@@ -49,11 +47,11 @@
                             <label class="form-check-label" for="gridCheck"> Acepta Terminos y Condiciones </label>
                         </div>
                     </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary" id="btnReservar">Realizar Reservacion</button>
+                    </div>
                 </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary" id="btnReservar">Realizar Reservacion</button>
             </div>
         </div>
     </div>

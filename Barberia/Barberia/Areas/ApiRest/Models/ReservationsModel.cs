@@ -12,9 +12,8 @@ namespace Barberia.Areas.ApiRest.Models
         public int idStore { get; set; }
         public string email { get; set; }
         public string name { get; set; }
-        public string nameFL { get; set; }
+        public string flName { get; set; }
         public string reservation { get; set; }
        
-
     }
 }

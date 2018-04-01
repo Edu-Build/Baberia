@@ -25,7 +25,7 @@ namespace Barberia.Areas.ApiRest.Controllers
         public JsonResult Services()
         {
 
-            return Json(new { data = service.ComboService() }, JsonRequestBehavior.AllowGet);
+            return Json( service.ComboService(), JsonRequestBehavior.AllowGet);
 
         }
     }

@@ -34,7 +34,7 @@ section{
     background: green;
 }
 
-.card{
+.servicios{
     border: 1px dashed #f5183b;  
 }
 
@@ -50,7 +50,25 @@ section{
 
 
 .relleno {
-    height: 500px;
+    height: 460px;
     width: 100%;
     background: transparent;
+}
+
+
+.contacto{
+    font-size: 1.2rem !important;
+}
+
+.mapa{
+    box-sizing : border-box;
+}
+
+
+.horario, .btn-servicios{
+    font-weight:bold !important;
+}
+
+.btn-servicios{
+    font-size: 2rem;
 }

@@ -8,9 +8,8 @@
     @Styles.Render("~/MisEstilos/css")
     @Scripts.Render("~/bundles/modernizr")
     <link href="~/MisEstilos/jquery.timepicker.css" rel="stylesheet" />
-
+    <link href="~/MisEstilos/misEstilos.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/gijgo@1.9.4/combined/css/gijgo.min.css" rel="stylesheet" type="text/css" />
-
 
 
 
@@ -23,15 +22,15 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <a class="navbar-brand" href="~/Home/Index">
-            <img src="Images/Logo.svg" class="d-inline-block logo-svg align-top" alt="Logo Bootstrap">
+            <img src="~/Images/Logo.svg" class="d-inline-block logo-svg align-top" alt="Logo Bootstrap">
         </a>
         <div class="collapse navbar-collapse" id="navbarToggleExternalContent">
-            <div class="navbar-nav ml-auto  mr-auto text-center">
-                <a class="nav-item nav-link color active" href="~/Home/Index">Inicio</a>
-                <a class="nav-item nav-link" href="~/Home/Service">Servicios</a>
-                <a class="nav-item nav-link" href="~/Home/Stores">Sucursal</a>
-                <a class="nav-item nav-link" href="~/Home/About">Nosotros</a>
-            </div>
+            <ul class="navbar-nav ml-auto  mr-auto text-center">
+                <li class="nav-item ">@Html.ActionLink("Inicio", "Index", "Home", new { @class = "nav-link" })</li>
+                <li class="nav-item ">@Html.ActionLink("Servicios", "Service", "Home", new { @class = "nav-link" })</li>
+                <li class="nav-item ">@Html.ActionLink("Sucursal", "Stores", "Home", new { @class = "nav-link" })</li>
+                <li class="nav-item ">@Html.ActionLink("Nosotros", "About", "Home", new { @class = "nav-link" })</li>
+            </ul>
             <div class="d-flex flex-row justify-content-center">
                 <span class="icon-facebook mr-4"></span>
                 <span class="icon-youtube"></span>
@@ -43,6 +42,11 @@
 
 
     @RenderBody()
+
+
+
+
+
 
     <hr />
 
@@ -68,7 +72,8 @@
 
 
 
-
+   
+  
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/MisScripts/calendario")
@@ -81,11 +86,11 @@
 
 
 
-    <script>
-
+ <script>
+/*Eventos que ser cargaran */
     $(document).ready(function () {
-
-
+           comboStore()
+           comboService()
            $('#rDate').datepicker({
                uiLibrary: 'bootstrap4',
                format: 'dd/mm/yyyy',
@@ -111,29 +116,22 @@
                reservation.idStore = $('#rStore').val()
                reservation.email = $('#rEmail').val()
                reservation.name = $('#rName').val()
-               reservation.ltName = $('#rFLName').val()
+               reservation.flName = $('#rflName').val()
                reservation.reservation = $('#rDate').val() + ' ' + $('#rHour').val()
-
                console.log(reservation)
-               //createRervation(JSON.stringify(reservation))
+               createReservation(JSON.stringify(reservation))
            })
-           comboService()
-
-          
-
+              
     })
 
-   
+  
         
 
     /*Creacion de Reservacion*/
     function createReservation(reservation) {
-        var value = " "
-
-        $.ajax({
+            $.ajax({
 
             url: "../../Api/CatReservaciones/Reservacion",
-            cache: false,
             type: "POST",
             contentType: "application/json; charset= utf-8",
             data: reservation,
@@ -153,83 +151,32 @@
         })
     }
 
-
-
-        /*Combo Servicios*/
-
-    function comboService() {
-
-        $.ajax({
-
-            url: '../../Api/ComServicio',
-            type: 'GET',
-            dataType: 'application/json; charset= utf-8',
-            success: function (data) {
-
-                var service = $("#rService")
-                var datos = data
-                $(datos).each(function (key, item) {
-
-                    service.append('<option value=' + item.idService + '>' + item.name + '</option>' )
-                })
-            }
-
-        })
-
+    /*Despliegue de informacion Servicios*/
+     function comboService() {
+        var url = "../../Api/ComServicio"
+        var value = ""    
+        $.getJSON(url, function (data) {
+            $.each(data, function (key, item) {
+                value += '<option value='+ item.id +'> '+ item.name +'</option>'
+            })
+            $('#rService').append(value)
+        })   
     }
 
 
-/*
-     function comboService() {
-        var url = "../../Api/ComServicio"
-        var value = ""
-       
-        $.getJson(url, function (data) {
-            $.each(data, function (key, item) {
-
-                
-                value = '<option value='+ item.idService +'> '+ item.name +'</option>'
-            })
-            $('#rService option').append(value)
-        })
-        
-        
-    }*/
+    /*Despligue de informacion Tienda*/
+     function comboStore() {
+         var url = "../../Api/ComTienda"
+         var value = ""
+         $.getJSON(url, function (data) {
+             $.each(data, function (key, item) {
+                 value += '<option value=' + item.id + '> ' + item.name + '</option>'
+             })
+             $('#rStore').append(value)
+         })
+     }
 
 
-
-        /*Catalogo de clientes
-
-        //Esta funcion fue sustituida para poder utlizar los atributos de DataTable
-       
-        function allCustomers() {         
-            var no = 1
-            var url = "../../Api/Clientes"
-            var value = ""
-           $.getJSON(url, function (data) {
-               $.each(data, function (key, item) {
-
-                   value += "<tr><td>" + no++
-                       + "</td><td id='idr'>" + item.id
-                       + "</td><td>" + item.email
-                       + "</td><td>" + item.name 
-                       + "</td><td>" + item.firstName
-                       + "</td><td>" + item.lastName
-                       + "</td><td>" + item.cellPhone
-                       + "</td><td>" + item.homePhone
-                       + "</td><td> <button class='btn btn-danger btnEliminar' style='margin-right: 5px;'>Eliminar</button>"
-                       + "<button class='btn btn-warning btnActualizar' onclick ='actualizar()'>Modificar</button></td></tr>"
-                          
-               })
-          
-               $("#listCustomers tbody").append(value)
-           })
-           
-       }*/
-
-
-
-
-    </script>
+</script>
 </body>
 </html>
