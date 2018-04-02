@@ -88,7 +88,16 @@
 
 
             allCustomers()
-            
+            $(document).on('click', '.btnDeleteReservation', function () {
+                var values = []
+
+                $('#Reservations td').each(function (x, y) {
+                    var value = $(this).text()
+                    values.push(value)
+                })
+                deleteCustomer(values[0])
+
+            })
         })
 
 
@@ -104,19 +113,37 @@
                 "columns": [
 
                     { "data": "id" },
+                    { "data": "nameService" },
+                    { "data": "nameStore" },
                     { "data": "email" },
                     { "data": "name" },
                     { "data": "nameFL" },
-                    { "data": "process" },
-                    { "data": "nameService" },
-                    { "data": "nameStore" },
-                    { "data": "reservation" },
                     { "data": "dateReservation" },
+                    { "data": "reservation" },
+                    { "data": "process" },
                     {
-                        "defaultContent": "<button class='btn btn-danger btnEliminar' style='margin-right: 5px;'>Eliminar</button>" +
-                                          "<button class='btn btn-warning btnModificar' style='margin-right: 5px;'>Editar</button>"
+                        "defaultContent": 
+                                "<a href='#' class='btn btn-info  active' data-toggle='modal' role='button' data-target='#exampleModal'>Eliminar</a>" +
+                                "<div class='modal fade' id='exampleModal' tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true'>" +
+                                     "<div class='modal-dialog' role='document'>" +
+                                         "<div class='modal-content'> " +
+                                             "<div class='modal-header'>" +
+                                                "<h5 class='modal-title' id='exampleModalLabel'>Eliminar Registro</h5>" +
+                                                "<button type='button' class='close' data-dismiss='modal' aria-label='Close'>" +
+                                                       "<span aria-hidden='true'>&times;</span> " +
+                                                "</button>" +
+                                              "</div>" +
+                                              "<div class='modal-body'>" +
+                                               "¿Esta Seguro que quiere ELIMINAR ESTE REGISTRO?" +
+                                            "</div>" +
+                                            "<div class='modal-footer'>" +
+                                                "<button type='button' class='btn btn-secondary' data-dismiss='modal'>Salir</button>" +
+                                                "<button type='button' class='btn btn-primary' id='btnDeleteReservation'>Eliminar</button>" +
+                                            "</div>" +
+                                        "</div>" +
+                                    "</div>" +
+                                "</div>" 
                     },
-
                 ],
                 "ServerSide": "true",
                 "dom": 'Bfrtip',
@@ -127,22 +154,38 @@
                         titleAtrr: 'PDF'
 
                     },
-                     {
-                         extend: 'excelHtml5',
-                         text: 'excel',
-                         titleAtrr: 'EXCEL'
-
-                     },
-                    {
-                        extend: 'pageLength'
-                }
                 ],
                 "language": traduccion_espaniol
 
             })
-
-
         }
+
+
+
+        /*Eliminacion de cliente*/
+
+
+        function deleteCustomer(id) {
+            var url = "../../Api/CatReservaciones/Reservacion/" + id
+            $.ajax({
+                url: url,
+                type: 'DELETE',
+                contentType: "application/json;chartset=utf-8",
+                statusCode: {
+                    200: function () {
+
+                        alert('La reservacion con : ' + id + ' fue Exitosamente eliminada')
+                        location.reload();
+                    },
+                    404: function () {
+
+                        alert('Eli cliente con: ' + id + ' no pudo ser eliminado')
+                        location.reload()
+                    }
+                }
+            })
+        }
+
 
 
 

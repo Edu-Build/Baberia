@@ -331,6 +331,7 @@
     <Content Include="Fonts\fonts\gijgo-material.eot" />
     <Content Include="Fonts\fonts\gijgo-material.ttf" />
     <Content Include="Fonts\fonts\gijgo-material.woff" />
+    <Content Include="Areas\Admin\Views\Shared\_Eliminar.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
