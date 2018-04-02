@@ -253,6 +253,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
+    <Content Include="Fonts\fonts\gijgo-material.svg" />
     <Content Include="Fonts\icomoon.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -263,7 +264,7 @@
     <Content Include="Images\Muestra.png" />
     <Content Include="Images\Servicio.jpg" />
     <Content Include="MisEstilos\Calendario.css" />
-    <Content Include="MisEstilos\gijgo.min.css" />
+    <Content Include="MisEstilos\gijgo.css" />
     <Content Include="MisEstilos\misEstilos.css" />
     <Content Include="MisEstilos\Style.css" />
     <Content Include="MisScripts\Calendario.min.js" />
@@ -325,6 +326,11 @@
     <Content Include="Fonts\icomoon.ttf" />
     <Content Include="Fonts\icomoon.woff" />
     <Content Include="MisEstilos\jquery.timepicker.css" />
+    <Content Include="Areas\Admin\Views\Admin\Service.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\Reservation.cshtml" />
+    <Content Include="Fonts\fonts\gijgo-material.eot" />
+    <Content Include="Fonts\fonts\gijgo-material.ttf" />
+    <Content Include="Fonts\fonts\gijgo-material.woff" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />

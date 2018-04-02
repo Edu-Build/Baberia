@@ -26,13 +26,14 @@ nav,footer{
 .fondo{
     background-color: #eee;
 }
-
+/*
 section{
     height: 1000px;
     width: 80%;
     margin: auto;
     background: green;
 }
+    */
 
 .servicios{
     border: 1px dashed #f5183b;  

@@ -392,7 +392,7 @@ namespace Barberia.Areas.Admin.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "Admin");
+            return RedirectToAction("Login");
         }
 
         //

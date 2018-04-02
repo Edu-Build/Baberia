@@ -32,10 +32,16 @@ namespace Barberia
             bundles.Add(new StyleBundle("~/MisEstilos/css").Include(
                          "~/MisEstilos/misEstilos.css",
                          "~/MisEstilos/Style.css",
-                         "~/MisEstilos/Calendario.css"));
+                         "~/MisEstilos/Calendario.css",
+                        "~/MisEstilos/jquery.timepicker.css",
+                        "~/MisEstilos/gijgo.css"));
 
-            bundles.Add(new StyleBundle("~/MisScripts/calendario").Include(
-                          "~/MisScripts/Calendario.min.js"));
+
+            bundles.Add(new StyleBundle("~/MisScripts/js").Include(
+                          "~/MisScripts/Calendario.min.js",
+                        "~/MisScripts/jquery.timepicker.js"));
+
+
         }
 
        
