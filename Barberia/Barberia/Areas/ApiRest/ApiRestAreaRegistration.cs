@@ -16,7 +16,7 @@ namespace Barberia.Areas.ApiRest
         {
 
 
-            /*Acciones Rest empleado*/
+            /*Acciones Rest Usuario*/
             context.MapRoute(
                 "accessUsers",
                 "Api/CatUsuarios/Usuario/{id}",
@@ -60,7 +60,7 @@ namespace Barberia.Areas.ApiRest
             );
 
 
-            /*Actualizacion proceso reervacion*/
+            /*Actualizacion proceso Reserrvacion*/
             context.MapRoute(
                 "accessActReservacion",
                 "Api/Actualizar/Proceso/{id}",
@@ -110,6 +110,45 @@ namespace Barberia.Areas.ApiRest
                 new { controller = "ComboService", action = "Services" }
             );
 
+            /*Acciones Rest Ventas Servicios Reservacion*/
+            context.MapRoute(
+                "accessSaleReservation",
+                "Api/VentasReservacion/Venta/{id}",
+                new { controller = "SaleServiceReservation", action = "SaleService", id = UrlParameter.Optional }
+            );
+
+            /*Listado Ventas Servicios Reservacion*/
+            context.MapRoute(
+                "accessSaleReservations",
+                "Api/VentasReservacion",
+                new { controller = "SaleServiceReservation", action = "SaleServices" }
+            );
+
+            /*Acciones Rest Ventas Servicios */
+            context.MapRoute(
+                "accessSaleService",
+                "Api/VentaServicios/Venta/{id}",
+                new { controller = "SaleServices", action = "SaleService", id = UrlParameter.Optional }
+            );
+
+            /*Listado Ventas Servicios */
+            context.MapRoute(
+                "accessSaleServices",
+                "Api/VentaServicios",
+                new { controller = "SaleServices", action = "SaleServices" }
+            );
+            /*Combo Reservaciones*/
+            context.MapRoute(
+                "accessComboReservations",
+                "Api/ComReservaciones",
+                new { controller = "ComboReservation", action = "reservations" }
+            );
+            /*Combo Empleados*/
+            context.MapRoute(
+                "accessComboEmployees",
+                "Api/ComEmpleados",
+                new { controller = "ComboEmployees", action = "employees" }
+            );
 
             context.MapRoute(
                 "Api_default",

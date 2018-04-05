@@ -1,1 +1,85 @@
-﻿
+﻿<div class="row">
+    <div class="col-md-12">
+        <h2 class="text-md-center mt-md-4">Catalogo de servicios</h2>
+    </div>
+</div>
+
+<table class="table table-hover table-responsive" id="listServices">
+    <thead>
+        <tr>
+            <th>No</th>
+            <th>Nombre</th>
+            <th>Tipo</th>
+            <th>Descripcion</th>
+            <th>Precio</th>
+            <th>Accion</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+
+<!-- Modal Eliminar Resgistro -->
+<div class="modal fade" id="modalDeleteService" tabindex="-1" role="dialog" aria-labelledby="modalDeleteLabelService">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ModalDeleteLabelService">Eliminar Servicio</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h5 class="h5">¿Esta seguro de <strong> eliminar este registro?</strong></h5>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-danger" id="btnDeleteService" data-dismiss="modal">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+
+<!-- Modal Actualizar Registro-->
+<div class="modal fade" id="modalUpdateService" tabindex="-1" role="dialog" aria-labelledby="modalUpdateLabelService">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalUpdatelLabelService">Formulario Modificacion de Servicio</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label> Nombre Servicio:</label>
+                        <input  type="text" class="form-control" id="sName">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label> Tipo:</label>
+                            <input type="text" class="form-control" id="sType">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label> Precio:</label>
+                            <input type="text" class="form-control" id="sPrice">
+                        </div>
+                    </div>
+                    <label> Descripcion:</label>
+                    <textarea rows="4" cols="50" id="sDescription" class="col-md-12">
+                        
+                    </textarea>
+                </form>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-warning" id="btnUpdateService">Actualizar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

@@ -1,10 +1,10 @@
 ﻿<div class="row">
     <div class="col-md-12">
-        <h2>Catalogo de Reservaciones</h2>
+        <h2 class="text-md-center mt-md-4">Catalogo de Reservaciones</h2>
     </div>
 </div>
 
-<table class="table table-hover table-responsive" id="Reservations">
+<table class="table table-hover table-responsive" id="listReservations" >
     <thead>
         <tr>
             <th>No</th>
@@ -22,3 +22,84 @@
     <tbody>
     </tbody>
 </table>
+
+<!-- Modal Eliminar Resgistro -->
+<div class="modal fade" id="modalDeleteReservation" tabindex="-1" role="dialog" aria-labelledby="modalDeleteLabelReservation">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ModalDeleteLabelReservation">Eliminar Reservacion</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h5 class="h5">¿Esta seguro de <strong> eliminar este registro?</strong></h5>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-danger"  id="btnDeleteReservation" data-dismiss="modal">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+
+
+
+<!-- Modal Actualizar Registro-->
+<div class="modal fade" id="modalUpdateReservation" tabindex="-1" role="dialog" aria-labelledby="modalUpdateLabelReservation">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalUpdatelLabelReservation">Formulario Modificacion de reservacion</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form >
+                    <div class="form-group">
+                        <input name="e" type="email" class="form-control" id="rEmail" >
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="rName" >
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="rflName" >
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>Servicio</label>
+                            <select id="rService" class="form-control">
+                                <option selected>Elija servicio:</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Proceso</label>
+                            <select id="rProcess" class="form-control">
+                                <option  value="EXITOSA..">EXITOSA...</option>
+                                <option  value="NO REALIZADA">NO REALIZADA</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <input class="form-control" id="rDate" placeholder="Fecha reservacion">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <input type="text" class="form-control" id="rHour" placeholder="Hora reservacion">
+                        </div>
+                    </div>
+                </form>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-warning" id="btnUpdateReservation" >Actualizar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+        

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>Barberia The Pepe's Store</title>
     @Styles.Render("~/Content/css")
     @Styles.Render("~/MisEstilos/css")
     @Scripts.Render("~/bundles/modernizr")
@@ -12,7 +12,9 @@
 
     <style>
 
-        .tables{ width: 90%; margin: 0 auto;}
+        .tables{ width: 85%; margin: 0 auto;}
+        .registerSale{width : 85%; margin: 0 auto; border:1px dashed #30e2fb; background: #f1f1f1}
+    
 
     </style>
 </head>
@@ -23,7 +25,7 @@
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <a class="navbar-brand" href="~/Areas/Admin/Index">
+        <a class="navbar-brand" href="~/Admin/Admin/Index">
             <img src="~/Images/Logo.svg" class="d-inline-block logo-svg align-top" alt="Logo Bootstrap">
         </a>
         <div class="collapse navbar-collapse" id="navbarToggleExternalContent">
@@ -31,7 +33,7 @@
                 <li class="nav-item ">@Html.ActionLink("Registro", "Index", "Admin", new { @class = "nav-link" })</li>
                 <li class="nav-item ">@Html.ActionLink("Servicios", "Service", "Admin", new { @class = "nav-link" })</li>
                 <li class="nav-item ">@Html.ActionLink("Reservaciones", "Reservation", "Admin", new { @class = "nav-link" })</li>
-       
+                <li class="nav-item ">@Html.ActionLink("Empleados", "Employ", "Admin", new { @class = "nav-link" })</li>
             </ul>
         
           <div class="d-flex flex-row justify-content-center">
@@ -45,6 +47,8 @@
     <div class="tables">
         @RenderBody()
     </div>
+
+    
 
     
      <hr />
@@ -85,30 +89,149 @@
 
 
         $(document).ready(function () {
+            var idReservation = ''
+            var idService = ''
+            var idEmploye = ''
+            comboService()
+            $('#rDate').datepicker({
+                uiLibrary: 'bootstrap4',
+                format: 'dd/mm/yyyy',
+                todayBtn: "linked",
+                language: "es"
+            })
+            $("#rHour").timepicker({
+                template: 'modal',
+                timeFormat: 'hh:mm p',
+                interval: 60,
+                minTime: '10',
+                maxTime: '6:00pm',
+                startTime: '10:00',
+                dynamic: false,
+                dropdown: true,
+                scrollbar: true
+            })
+            /*Reservaciones*/
 
+            allReservations()
 
-            allCustomers()
-            $(document).on('click', '.btnDeleteReservation', function () {
-                var values = []
+            $(document).on('click', '#btnDeleteReservationModal', function () {
+                
+                idReservation = $(this).parents("tr").find("td").eq(0).html();
+            })
 
-                $('#Reservations td').each(function (x, y) {
-                    var value = $(this).text()
-                    values.push(value)
-                })
-                deleteCustomer(values[0])
+            $('#btnDeleteReservation').on('click', function () {
+                deleteReservation(idReservation)
+            })
+
+            $(document).on('click', '#btnSearchReservationModal', function () {             
+                idReservation = $(this).parents("tr").find("td").eq(0).html();
+                searchReservation(idReservation)
+
+            })
+
+            $('#btnUpdateReservation').on('click', function () {
+
+                var reservation = new Object()
+
+                reservation.id = idReservation
+                reservation.email = $('#rEmail').val()
+                reservation.name = $('#rName').val()
+                reservation.flName = $('#rflName').val()
+                reservation.idService = $('#rService').val()
+                reservation.process = $('#rProcess').val()
+                reservation.reservation = $('#rDate').val() + ' ' + $('#rHour').val()
+                updateReservation(reservation.id, JSON.stringify(reservation))
+
+            })
+            /*Servicios*/
+            allServices()
+            $(document).on('click', '#btnDeleteServiceModal', function () {
+
+                idService = $(this).parents("tr").find("td").eq(0).html();
+            })
+
+            $('#btnDeleteService').on('click', function () {
+                deleteService(idService)
+            })
+            $(document).on('click', '#btnSearchServiceModal', function () {
+                idService = $(this).parents("tr").find("td").eq(0).html();
+                searchService(idService)
+
+            })
+
+            $('#btnUpdateService').on('click', function () {
+
+                var service = new Object()
+
+                service.id = idService
+                service.name = $('#sName').val()
+                service.type = $('#sType').val()
+                service.price = $('#sPrice').val()
+                service.description = $('#sDescription').val()
+                updateService(service.id, JSON.stringify(service))
+
+            })
+            /*Empleados*/
+            allEmployees()
+            $('#btnCreateEmploye').on('click', function () {
+                var employe = new Object()
+
+                employe.name = $('#ecName').val()
+                employe.firstName = $('#ecfName').val()
+                employe.lastName = $('#eclName').val()
+                employe.cellPhone = $('#ecPhone').val()
+               
+                createEmploye(JSON.stringify(employe))
+            })
+            $(document).on('click', '#btnDeleteEmployeModal', function () {
+
+                idEmploye = $(this).parents("tr").find("td").eq(0).html();
+            })
+
+            $('#btnDeleteEmploye').on('click', function () {
+                deleteEmploye(idEmploye)
+            })
+            $(document).on('click', '#btnSearchEmployeModal', function () {
+                idEmploye = $(this).parents("tr").find("td").eq(0).html();
+                searchEmploye(idEmploye)
+
+            })
+
+            $('#btnUpdateEmploye').on('click', function () {
+
+                var employe = new Object()
+
+                employe.id = idEmploye
+                employe.name = $('#eName').val()
+                employe.firstName = $('#efName').val()
+                employe.lastName = $('#elName').val()
+                employe.cellPhone = $('#ePhone').val()
+                updateEmploye(employe.id, JSON.stringify(employe))
 
             })
         })
 
 
-        function allCustomers() {
-            $('#Reservations').DataTable({
 
 
-                "ajax": {
-                    "url": "../../Api/CatReservaciones",
-                    "type": "GET",
-                    "dataType": "json"
+
+
+/*---------------------------------------------------------------INICIAN FUNCIONES DE RESERVACIONES---------------------------------------------------------*/
+
+
+
+        /*LISTA DE TODAS LAS RESERVACIONES*/
+        function allReservations() {
+            $('#listReservations').DataTable({
+                'stateSave': true,
+                'scrollY':'600px',
+                'scrollCollapse': false,
+                'paging': false,
+                'destroy' : true,
+                'ajax': {
+                    'url': '../../Api/CatReservaciones',
+                    'type': 'GET',
+                    'dataType': 'json'
                 },
                 "columns": [
 
@@ -123,63 +246,94 @@
                     { "data": "process" },
                     {
                         "defaultContent": 
-                                "<a href='#' class='btn btn-info  active' data-toggle='modal' role='button' data-target='#exampleModal'>Eliminar</a>" +
-                                "<div class='modal fade' id='exampleModal' tabindex='-1' role='dialog' aria-labelledby='exampleModalLabel' aria-hidden='true'>" +
-                                     "<div class='modal-dialog' role='document'>" +
-                                         "<div class='modal-content'> " +
-                                             "<div class='modal-header'>" +
-                                                "<h5 class='modal-title' id='exampleModalLabel'>Eliminar Registro</h5>" +
-                                                "<button type='button' class='close' data-dismiss='modal' aria-label='Close'>" +
-                                                       "<span aria-hidden='true'>&times;</span> " +
-                                                "</button>" +
-                                              "</div>" +
-                                              "<div class='modal-body'>" +
-                                               "¿Esta Seguro que quiere ELIMINAR ESTE REGISTRO?" +
-                                            "</div>" +
-                                            "<div class='modal-footer'>" +
-                                                "<button type='button' class='btn btn-secondary' data-dismiss='modal'>Salir</button>" +
-                                                "<button type='button' class='btn btn-primary' id='btnDeleteReservation'>Eliminar</button>" +
-                                            "</div>" +
-                                        "</div>" +
-                                    "</div>" +
-                                "</div>" 
+                                
+                                "<button type='button' id='btnDeleteReservationModal' class='btn btn-danger mr-1' data-toggle='modal' data-target='#modalDeleteReservation' >Eliminar</button>" +
+                                "<button type='button' id='btnSearchReservationModal' class='btn btn-warning ' data-toggle='modal' data-target='#modalUpdateReservation' >Modificar</button>"           
                     },
                 ],
-                "ServerSide": "true",
-                "dom": 'Bfrtip',
-                "buttons": [
+                'ServerSide': true,
+                'dom': 'Bfrtip',
+                'buttons' : [
                     {
-                        extend: 'pdfHtml5',
-                        text: 'pdf',
-                        titleAtrr: 'PDF'
+                        'extend': 'excelHtml5',
+                        'text': 'Reporte Excel',
+                        'titleAttr': 'Excel'
 
                     },
                 ],
-                "language": traduccion_espaniol
+                'language': traduccion_espaniol
 
             })
         }
 
 
 
-        /*Eliminacion de cliente*/
+        /*ACTUALIZACION DE RESERVACION*/
+        function updateReservation(id, reservation) {
+            var url = '../../Api/CatReservaciones/Reservacion/' + id
+            $.ajax({
+                url: url,
+                type: 'PUT',
+                data: reservation,
+                contentType: 'application/json;chartset=utf-8',
+                statusCode: {
+                    200: function () {
+                        alert('cliente con ' + id + ' fue actualizado exitosamente')
+                        location.reload()
+                    },
+                    404: function () {
+                        alert('cliente con ' + id + ' no fue encontrado')
+                        location.reload()
+                    },
+                    400: function () {
+                        alert('Error')
+                        location.reload()
+                    }
+                }
+            });
+        }
 
 
-        function deleteCustomer(id) {
-            var url = "../../Api/CatReservaciones/Reservacion/" + id
+        /*BUSQUEDA DE RESERVACION POR ID*/
+        function searchReservation(id) {
+            var url = '../../Api/CatReservaciones/Reservacion/' + id
+            $.getJSON(url)
+                .done(function (data) {
+
+                    var date = data.reservation
+                    var date = date.substring(0, 10)
+                    var hour = data.reservation
+                    var hour = hour.substring(11, 19)
+                    $('#rEmail').val(data.email)
+                    $('#rName').val(data.name)
+                    $('#rflName').val(data.flName)
+                    $('#rService').val(data.idService)
+                    $('#rProcess').val(data.process)
+                    $('#rDate').val(date)
+                    $('#rHour').val(hour)
+                })
+                .fail(function (erro) {
+                    Console.log("Cliente no encontrado")
+                });
+        };
+
+
+        /*ELIMINACION DE RESERVACION*/
+        function deleteReservation(id) {
+            var url = '../../Api/CatReservaciones/Reservacion/' + id
             $.ajax({
                 url: url,
                 type: 'DELETE',
-                contentType: "application/json;chartset=utf-8",
+                contentType: 'application/json;chartset=utf-8',
                 statusCode: {
                     200: function () {
 
-                        alert('La reservacion con : ' + id + ' fue Exitosamente eliminada')
+                        alert('La reservacion con  el: ' + id + ' fue Exitosamente eliminada')
                         location.reload();
                     },
                     404: function () {
 
-                        alert('Eli cliente con: ' + id + ' no pudo ser eliminado')
+                        alert('La reservaion con el: ' + id + ' no pudo ser eliminado')
                         location.reload()
                     }
                 }
@@ -187,9 +341,319 @@
         }
 
 
+        /*DESPLIEGUE DE SERVICIOS PARA FORMULARIO */
+        function comboService() {
+            var url = '../../Api/ComServicio'
+            var value = ''
+            $.getJSON(url, function (data) {
+                $.each(data, function (key, item) {
+                    value += '<option value=' + item.id + '> ' + item.name + '</option>'
+                })
+                $('#rService').append(value)
+            })
+        }
+
+/*--------------------------------------------------------FINALIZAN FUNCIONES DE RESERVACIONES--------------------------------------------------------------*/
 
 
-        /*Variable para la traduccion de DataTable la cual contine los atributos Json necesarios */
+/*--------------------------------------------------------INICIAN FUNCIONES DE SERVICIOS--------------------------------------------------------------------*/
+
+
+
+
+        /*LISTA DE TODOS LOS SERVICIOS*/
+        function allServices() {
+            $('#listServices').DataTable({
+                'stateSave': true,
+                'scrollY': '600px',
+                'scrollCollapse': false,
+                'paging': false,
+                'destroy': true,
+                'ajax': {
+                    'url': '../../Api/CatServicio',
+                    'type': 'GET',
+                    'dataType': 'json'
+                },
+                "columns": [
+
+                    { "data": "id" },
+                    { "data": "name" },
+                    { "data": "type" },
+                    { "data": "description" },
+                    { "data": "price" },
+                    {
+                        "defaultContent":
+                                "<button type='button' id='btnDeleteServiceModal' class='btn btn-danger mr-1' data-toggle='modal' data-target='#modalDeleteService' >Eliminar</button>" +
+                                "<button type='button' id='btnSearchServiceModal' class='btn btn-warning ' data-toggle='modal' data-target='#modalUpdateService' >Modificar</button>"
+                    },
+                ],
+                'ServerSide': true,
+                'dom': 'Bfrtip',
+                'buttons': [
+                    {
+                        'extend': 'excelHtml5',
+                        'text': 'Reporte Excel',
+                        'titleAttr': 'Excel'
+
+                    },
+                     {
+                         'extend': 'pdfHtml5',
+                         'text': 'Reporte PDF',
+                         'titleAttr': 'pdf'
+
+                     }
+                ],
+                'language': traduccion_espaniol
+
+            })
+        }
+
+
+
+        /*ACTUALIZACION DE SERVICIOS*/
+        function updateService(id, service) {
+            var url = '../../Api/CatServicio/Servicio/' + id
+            $.ajax({
+                url: url,
+                type: 'PUT',
+                data: service,
+                contentType: 'application/json;chartset=utf-8',
+                statusCode: {
+                    200: function () {
+                        alert('Servicio con ' + id + ' fue actualizado exitosamente')
+                        location.reload()
+                    },
+                    404: function () {
+                        alert('Servicio con ' + id + ' no fue encontrado')
+                        location.reload()
+                    },
+                    400: function () {
+                        alert('Error')
+                        location.reload()
+                    }
+                }
+            });
+        }
+
+
+        /*BUSQUEDA DE SERVICIO POR ID*/
+        function searchService(id) {
+            var url = '../../Api/CatServicio/Servicio/' + id
+            $.getJSON(url)
+                .done(function (data) {
+
+                   
+                    $('#sName').val(data.name)
+                    $('#sType').val(data.type)
+                    $('#sPrice').val(data.price)
+                    $('#sDescription').val(data.description)
+                    
+                })
+                .fail(function (erro) {
+                    Console.log("Cliente no encontrado")
+                });
+        };
+
+
+        /*ELIMINACION DE SERVICIO*/
+        function deleteService(id) {
+            var url = '../../Api/CatServicio/Servicio/' + id
+            $.ajax({
+                url: url,
+                type: 'DELETE',
+                contentType: 'application/json;chartset=utf-8',
+                statusCode: {
+                    200: function () {
+
+                        alert('El servicio  con  el: ' + id + ' fue Exitosamente eliminada')
+                        location.reload();
+                    },
+                    404: function () {
+
+                        alert('El servicio con el: ' + id + ' no pudo ser eliminado')
+                        location.reload()
+                    }
+                }
+            })
+        }
+
+/*--------------------------------------------------------FINALIZAN FUNCIONES DE SERVICIOS--------------------------------------------------------------------*/
+
+
+
+/*--------------------------------------------------------INICIAN FUNCIONES DE EMPLEADOS----------------------------------------------------------------------*/
+
+
+
+        /*LISTA DE TODOS LOS EMPLEADOS*/
+        function allEmployees() {
+            $('#listEmployees').DataTable({
+                'stateSave': true,
+                'scrollY': '600px',
+                'scrollCollapse': false,
+                'paging': false,
+                'destroy': true,
+                'ajax': {
+                    'url': '../../Api/CatEmpleados',
+                    'type': 'GET',
+                    'dataType': 'json'
+                },
+                "columns": [
+
+                    { "data": "id" },
+                    { "data": "name" },
+                    { "data": "firstName"},
+                    { "data": "lastName" },
+                    { "data": "cellPhone" },
+                    {
+                        "defaultContent":
+                                "<button type='button' id='btnDeleteEmployeModal' class='btn btn-danger mr-1' data-toggle='modal' data-target='#modalDeleteEmploye' >Eliminar</button>" +
+                                "<button type='button' id='btnSearchEmployeModal' class='btn btn-warning ' data-toggle='modal' data-target='#modalUpdateEmploye' >Modificar</button>"
+                    },
+                ],
+                'ServerSide': true,
+                'dom': 'Bfrtip',
+                'buttons': [
+                    {
+                        'extend': 'excelHtml5',
+                        'text': 'Reporte Excel',
+                        'titleAttr': 'Excel'
+
+                    },
+                     {
+                         'extend': 'pdfHtml5',
+                         'text': 'Reporte PDF',
+                         'titleAttr': 'pdf'
+
+                     }
+                ],
+                'language': traduccion_espaniol
+
+            })
+        }
+
+
+
+        /*CREACION DE EMPLEADO*/
+        function createEmploye(employe) {
+            $.ajax({
+
+                url: '../../Api/CatEmpleados/Empleado/',
+                type: "POST",
+                contentType: "application/json; charset= utf-8",
+                data: employe,
+                dataType: "json",
+                statusCode: {
+                    200: function () {
+                        alert("Su Empleado ha sido Registrado")
+                        console.log("Su Empleado ha sido Registrado")
+                        location.reload()
+                    },
+                    400: function () {
+
+                        alert("Su Empleado no pudo ser Registrado con exito")
+                        location.reload()
+
+                    }
+                }
+            })
+        }
+
+
+        /*ACTUALIZACION DE EMPLEADO*/
+        function updateEmploye(id, employe) {
+            var url = '../../Api/CatEmpleados/Empleado/' + id
+            $.ajax({
+                url: url,
+                type: 'PUT',
+                data: employe,
+                contentType: 'application/json;chartset=utf-8',
+                statusCode: {
+                    200: function () {
+                        alert('El empleado con ' + id + ' fue actualizado exitosamente')
+                        location.reload()
+                    },
+                    404: function () {
+                        alert('El Empleado con ' + id + ' no fue encontrado')
+                        location.reload()
+                    },
+                    400: function () {
+                        alert('Error')
+                        location.reload()
+                    }
+                }
+            });
+        }
+
+
+        /*BUSQUEDA DE EMPLEADO POR ID*/
+        function searchEmploye(id) {
+            var url = '../../Api/CatEmpleados/Empleado/' + id
+            $.getJSON(url)
+                .done(function (data) {
+
+
+                    $('#eName').val(data.name)
+                    $('#efName').val(data.firstName)
+                    $('#elName').val(data.lastName)
+                    $('#ePhone').val(data.cellPhone)
+
+                })
+                .fail(function (erro) {
+                    Console.log("Empleado  no encontrado")
+                });
+        };
+
+
+        /*ELIMINACION DE EMPLEADO*/
+        function deleteEmploye(id) {
+            var url = '../../Api/CatEmpleados/Empleado/' + id
+            $.ajax({
+                url: url,
+                type: 'DELETE',
+                contentType: 'application/json;chartset=utf-8',
+                statusCode: {
+                    200: function () {
+
+                        alert('El Empleado  con  el: ' + id + ' fue Exitosamente eliminada')
+                        location.reload();
+                    },
+                    404: function () {
+
+                        alert('El Empleado con el: ' + id + ' no pudo ser eliminado')
+                        location.reload()
+                    }
+                }
+            })
+        }
+
+/*--------------------------------------------------------FINALIZAN FUNCIONES DE EMPLEADO--------------------------------------------------------------------*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /*VARIABLE GLOBAL QUE TRADUCE LOS COMPONENTES DEL DATATABLE*/
         var traduccion_espaniol = {
             "sProcessing": "Procesando...",
             "sLengthMenu": "Mostrar _MENU_ registros",

@@ -13,14 +13,13 @@ namespace Barberia.Areas.ApiRest.Models
         public bool createEmploye(EmployeesModel employe)
         {
 
-            string query = "INSERT INTO employees VALUES(@id,@name,@firstName,@lastName,@cellPhone)";
+            string query = "INSERT INTO employees VALUES(@name,@firstName,@lastName,@cellPhone)";
             SqlConnection conn = new SqlConnection(cadena);
             SqlCommand cmd = new SqlCommand(query, conn);
 
             try
             {
                 conn.Open();
-                cmd.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = employe.id;
                 cmd.Parameters.Add("@name", System.Data.SqlDbType.VarChar).Value = employe.name;
                 cmd.Parameters.Add("@firstName", System.Data.SqlDbType.VarChar).Value = employe.firstName;
                 cmd.Parameters.Add("@lastName", System.Data.SqlDbType.VarChar).Value = employe.lastName;

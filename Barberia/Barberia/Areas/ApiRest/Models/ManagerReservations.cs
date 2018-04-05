@@ -45,7 +45,7 @@ namespace Barberia.Areas.ApiRest.Models
 
         public bool updateReservations(ReservationsModel reservation)
         {
-            string query = "UPDATE reservations SET idService = @idService, idStore = @idStore, email = @email, name = @name, flName = @flName, reservation = @reservation WHERE id = @id";
+            string query = "UPDATE reservations SET idService = @idService, email = @email, name = @name, flName = @flName, reservation = @reservation, process = @process WHERE id = @id";
             SqlConnection conn = new SqlConnection(cadena);
             SqlCommand cmd = new SqlCommand(query, conn);
 
@@ -54,11 +54,11 @@ namespace Barberia.Areas.ApiRest.Models
                 conn.Open();
                 cmd.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = reservation.id;
                 cmd.Parameters.Add("@idService", System.Data.SqlDbType.Int).Value = reservation.idService;
-                cmd.Parameters.Add("@idStore", System.Data.SqlDbType.Int).Value = reservation.idStore;
                 cmd.Parameters.Add("@email", System.Data.SqlDbType.VarChar).Value = reservation.email;
                 cmd.Parameters.Add("@name", System.Data.SqlDbType.VarChar).Value = reservation.name;
                 cmd.Parameters.Add("@flName", System.Data.SqlDbType.VarChar).Value = reservation.flName;
                 cmd.Parameters.Add("@reservation", System.Data.SqlDbType.VarChar).Value = reservation.reservation;
+                cmd.Parameters.Add("@process", System.Data.SqlDbType.VarChar).Value = reservation.process;
 
                 int register = cmd.ExecuteNonQuery();
 
@@ -131,7 +131,7 @@ namespace Barberia.Areas.ApiRest.Models
 
         public ReservationsModel returnReservation(int id)
         {
-            string query = "SELECT id, idService, idStore, email, name, flName, reservation FROM reservations WHERE id = @id";
+            string query = "SELECT idService, email, name, flName, reservation, process FROM reservations WHERE id = @id";
             SqlConnection conn = new SqlConnection(cadena);
             SqlCommand cmd = new SqlCommand(query, conn);
             ReservationsModel reservation = new ReservationsModel();
@@ -146,14 +146,12 @@ namespace Barberia.Areas.ApiRest.Models
 
                 if (dr.Read())
                 {
-
-                    reservation.idService = dr.GetInt32(1);
-                    reservation.idStore = dr.GetInt32(2);
-                    reservation.email = dr.GetString(3);
-                    reservation.name = dr.GetString(4);
-                    reservation.flName = dr.GetString(5);
-                    reservation.reservation = dr.GetString(6);
-
+                    reservation.idService = dr.GetInt32(0);
+                    reservation.email = dr.GetString(1);
+                    reservation.name = dr.GetString(2);
+                    reservation.flName = dr.GetString(3);
+                    reservation.reservation = dr.GetString(4);
+                    reservation.process = dr.GetString(5);
                 }
 
 

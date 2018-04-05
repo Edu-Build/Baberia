@@ -1,0 +1,111 @@
+﻿
+<div class="row mt-3">
+    <div class="col-md-12">
+        <h2 class="text-md-center mt-md-4">Gestion de Empleados</h2>
+    </div>
+</div>
+
+<div class="row mt-5 align-items-center">
+    <div class="col-md-6 ">
+        <h2>Registrar Empleados</h2>
+        <form class="form-employ">
+            <div class="form-group">
+                <label> Nombre Empleado:</label>
+                <input type="text" class="form-control" id="ecName">
+            </div>
+            <div class="form-group">
+                <label> Apellido Paterno:</label>
+                <input type="text" class="form-control" id="ecfName">
+            </div>
+            <div class="form-group">
+                <label> Apellido Materno:</label>
+                <input type="text" class="form-control" id="eclName">
+            </div>
+            <div class="form-group">
+                <label> Telefono:</label>
+                <input type="text" class="form-control" id="ecPhone">
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-info" id="btnCreateEmploye">Registrar</button>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-6">
+        <table class="table table-hover table-responsive tableEmploy" id="listEmployees">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Nombre</th>
+                    <th>Apellido P</th>
+                    <th>Apellido M</th>
+                    <th>Celular</th>
+                    <th>Accion</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+
+
+<!-- Modal Eliminar Resgistro -->
+<div class="modal fade" id="modalDeleteEmploye" tabindex="-1" role="dialog" aria-labelledby="modalDeleteLabelEmploye">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ModalDeleteLabelEmploye">Eliminar Empleado</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h5 class="h5">¿Esta seguro de <strong> eliminar este registro?</strong></h5>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-danger" id="btnDeleteEmploye" data-dismiss="modal">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+
+<!-- Modal Actualizar Registro-->
+<div class="modal fade" id="modalUpdateEmploye" tabindex="-1" role="dialog" aria-labelledby="modalUpdateLabelEmploye">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalUpdatelLabelEmploye">Formulario Modificacion de Empleado</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label> Nombre Empleado:</label>
+                        <input type="text" class="form-control" id="eName">
+                    </div>
+                    <div class="form-group">
+                        <label> Apellido Paterno:</label>
+                        <input type="text" class="form-control" id="efName">
+                    </div>
+                    <div class="form-group">
+                        <label> Apellido Materno:</label>
+                        <input type="text" class="form-control" id="elName">
+                    </div>
+                    <div class="form-group">
+                        <label> Telefono:</label>
+                        <input type="text" class="form-control" id="ePhone">
+                    </div>
+                    
+                </form>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-warning" id="btnUpdateEmploye">Actualizar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

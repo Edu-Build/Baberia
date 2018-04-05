@@ -1,7 +1,173 @@
-﻿
-@{
-    ViewBag.Title = "Index";
-}
+﻿<h2 class="text-center">Venta de servicios por reservacion y sin reservacion</h2>
 
-<h2>Ya puedo dormir tranquilo ya tengo mi Gestion de usuarios</h2>
+<div class="row mt-4 align-items-center">
+    <div class="col-md-6">
+        <div class="registerSale">
+            <form>
+                <h2 class="h2 text-center py-2">Venta con reservacion</h2>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <select id="srReservation" class="form-control ml-5">
+                            <option selected>--Reservacion a Nombre--</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                       <button class="btn btn-info ml-5" id="srSearchReservation">Buscar</button>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <select id="srEmpleado" class="form-control">
+                            <option selected>--Empleado--</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <select id="srService" class="form-control">
+                            <option selected>--Elija servicio-</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="ml-4">Descuento</label>
+                        <input type="text" class="form-control" id="srDiscount">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="ml-4">A pagar</label>
+                        <input type="text" class="form-control" id="srPay">
+                    </div>
+                </div>
+            </form>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Limpiar</button>
+                <button type="submit" class="btn btn-warning" id="btnCreatesrReservation">Realizar Venta</button>
+            </div>
+        </div>
+    </div>
 
+    <div class="col-md-6">
+        <div class="registerSale">
+            <form>
+                <h2 class="h2 text-center py-2">Venta sin reservacion</h2>
+                
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <select id="ssEmpleado" class="form-control">
+                            <option selected>--Empleado--</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <select id="ssService" class="form-control">
+                            <option selected>--Elija servicio-</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="ml-4">Descuento</label>
+                        <input type="text" class="form-control" id="ssDiscount">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label class="ml-4">A pagar</label>
+                        <input type="text" class="form-control" id="ssPay">
+                    </div>
+                </div>
+            </form>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Limpiar</button>
+                <button type="submit" class="btn btn-warning" id="btnCreatesrReservation">Realizar Venta</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--
+<div class="row mt-4 align-items-center">
+    <div class="col-md-6">
+        <div class="registerSale">
+            <form>
+                <div class="form-group">
+                    <input name="e" type="email" class="form-control" id="rEmail">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="rName">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="rflName">
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>Servicio</label>
+                        <select id="rService" class="form-control">
+                            <option selected>Elija servicio:</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Proceso</label>
+                        <select id="rProcess" class="form-control">
+                            <option value="EXITOSA..">EXITOSA...</option>
+                            <option value="NO REALIZADA">NO REALIZADA</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <input class="form-control" id="rDate" placeholder="Fecha reservacion">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <input type="text" class="form-control" id="rHour" placeholder="Hora reservacion">
+                    </div>
+                </div>
+            </form>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                <button type="submit" class="btn btn-warning" id="btnUpdateReservation">Actualizar</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="registerSale">
+            <form>
+                <div class="form-group">
+                    <input name="e" type="email" class="form-control" id="rEmail">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="rName">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="rflName">
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>Servicio</label>
+                        <select id="rService" class="form-control">
+                            <option selected>Elija servicio:</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Proceso</label>
+                        <select id="rProcess" class="form-control">
+                            <option value="EXITOSA..">EXITOSA...</option>
+                            <option value="NO REALIZADA">NO REALIZADA</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <input class="form-control" id="rDate" placeholder="Fecha reservacion">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <input type="text" class="form-control" id="rHour" placeholder="Hora reservacion">
+                    </div>
+                </div>
+            </form>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                <button type="submit" class="btn btn-warning" id="btnUpdateReservation">Actualizar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    -->
