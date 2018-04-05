@@ -143,6 +143,15 @@ namespace Barberia.Areas.ApiRest
                 "Api/ComReservaciones",
                 new { controller = "ComboReservation", action = "reservations" }
             );
+
+            /*Retorno reservacion para registro de venta*/
+            context.MapRoute(
+                "accessReturnReservations",
+                "Api/ComRegistroReservacion/Registro/{id}",
+                new { controller = "ComboReservation", action = "reservationSale", id = UrlParameter.Optional }
+            );
+
+
             /*Combo Empleados*/
             context.MapRoute(
                 "accessComboEmployees",

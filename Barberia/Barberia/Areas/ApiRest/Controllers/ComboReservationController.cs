@@ -19,6 +19,15 @@ namespace Barberia.Areas.ApiRest.Controllers
             reservation = new ManagerComboReservations();
         }
 
+        [HttpGet]
+        public JsonResult reservationSale(int id)
+        {
+
+            return Json(reservation.retunrReservationSale(id), JsonRequestBehavior.AllowGet);
+
+        }
+
+
 
         /*Retornamos los clientes en formato Json*/
         [HttpGet]

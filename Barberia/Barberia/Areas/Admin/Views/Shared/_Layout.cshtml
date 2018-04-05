@@ -93,6 +93,9 @@
             var idService = ''
             var idEmploye = ''
             comboService()
+            combosrService()
+            combosrEmploye()
+            combosrNameCustomer()
             $('#rDate').datepicker({
                 uiLibrary: 'bootstrap4',
                 format: 'dd/mm/yyyy',
@@ -209,9 +212,80 @@
                 updateEmploye(employe.id, JSON.stringify(employe))
 
             })
+            /*Registro de Venta*/
+            $(document).on('click', "#srRegister", function () {
+
+                var id = $('#srReservation').val()
+                alert(id)
+                searchRegister(id)
+            })
+
+
         })
 
 
+
+
+/*---------------------------------------------------------------INICIAN FUNCIONES DE REGISTRO--------------------------------------------------------------*/
+
+        /*DESPLIEGUE DE CLIENTES CON FORMULARIO */
+        function combosrNameCustomer() {
+            var url = '../../Api/comReservaciones'
+            var value = ''
+            $.getJSON(url, function (data) {
+                $.each(data, function (key, item) {
+                    value += '<option value=' + item.id + '> ' + item.name + '</option>'
+                })
+                $('#srReservation').append(value)
+            })
+        }
+        
+        /*DESPLIEGUE DE INFORMACION*/
+        function combosrService() {
+            var url = '../../Api/ComServicio'
+            var value = ''
+            $.getJSON(url, function (data) {
+                $.each(data, function (key, item) {
+                    value += '<option value=' + item.id + '> ' + item.name + '</option>'
+                })
+                $('#srService').append(value)
+            })
+        }
+
+
+        /*DESPLIEGUE DE EMPLEADOS*/
+        function combosrEmploye() {
+            var url = '../../Api/ComEmpleados'
+            var value = ''
+            $.getJSON(url, function (data) {
+                $.each(data, function (key, item) {
+                    value += '<option value=' + item.id + '> ' + item.name + '</option>'
+                })
+                $('#srEmploye').append(value)
+            })
+        }
+
+
+        /*BUSQUEDA DE SERVICIO POR ID*/
+        function searchRegister(id) {
+            var url = '../../Api/ComRegistroReservacion/Registro/' + id
+            $.getJSON(url)
+                .done(function (data) {
+
+
+                    $('#srService').val(idService)
+                    $('#srPay').val(price)
+                   
+
+                })
+                .fail(function (erro) {
+                    Console.log("Cliente no encontrado")
+                });
+        };
+
+
+
+/*---------------------------------------------------------------FINALIZAN FUNCIONES DE REGISTRO------------------------------------------------------------*/
 
 
 
