@@ -6,23 +6,23 @@ using System.Web;
 
 namespace Barberia.Areas.ApiRest.Models
 {
-    public class ManagerSaleService
+    public class ManagerSaleProducts
     {
         private static string cadena = "Data Source=aed08db.database.windows.net; Initial Catalog=aed182e08; User ID=aed08user; Password=Aed08pas$;";
 
-        public bool createSale(SaleServicesModel sale)
+        public bool createRegisterSale(SaleProductModel sale)
         {
-
-            string query = "INSERT INTO saleServices VALUES(@idService,@idStore,@idEmploye,GETDATE(),@discount,@total)";
+            
+            string query = "INSERT INTO saleProduct VALUES(@idProduct, @idStore, @quantity, @discount, @total, GETDATE())";
             SqlConnection conn = new SqlConnection(cadena);
             SqlCommand cmd = new SqlCommand(query, conn);
 
             try
             {
                 conn.Open();
-                cmd.Parameters.Add("@idService", System.Data.SqlDbType.Int).Value = sale.idService;
-                cmd.Parameters.Add("@idStore", System.Data.SqlDbType.Int).Value = sale.idStore;
-                cmd.Parameters.Add("@idEmploye", System.Data.SqlDbType.Int).Value = sale.idEmploye;
+                cmd.Parameters.Add("@idProduct", System.Data.SqlDbType.Int).Value = sale.idProduct;
+                cmd.Parameters.Add("@idStore", System.Data.SqlDbType.Money).Value = sale.idStore;
+                cmd.Parameters.Add("@quantity", System.Data.SqlDbType.Int).Value = sale.quantity;
                 cmd.Parameters.Add("@discount", System.Data.SqlDbType.Float).Value = sale.discount;
                 cmd.Parameters.Add("@total", System.Data.SqlDbType.Money).Value = sale.total;
 
@@ -42,9 +42,9 @@ namespace Barberia.Areas.ApiRest.Models
 
         }
 
-        public bool updateSaleService(SaleServicesModel sale)
+        public bool updateRegisterSale(SaleProductModel sale)
         {
-            string query = "UPDATE saleServices SET idService = @idService, idStore = @idStore, idEmploy = @idEmploye,  total = @total  WHERE id = @id";
+            string query = "UPDATE saleProduct SET idProduct = @idProduct, idStore = @idStore, quantity = @quantity, total = @total WHERE id = @id";
             SqlConnection conn = new SqlConnection(cadena);
             SqlCommand cmd = new SqlCommand(query, conn);
 
@@ -52,9 +52,10 @@ namespace Barberia.Areas.ApiRest.Models
             {
                 conn.Open();
                 cmd.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = sale.id;
-                cmd.Parameters.Add("@idService", System.Data.SqlDbType.Int).Value = sale.idService;
-                cmd.Parameters.Add("@idStore", System.Data.SqlDbType.Int).Value = sale.idStore;
-                cmd.Parameters.Add("@idEmploye", System.Data.SqlDbType.Int).Value = sale.idEmploye;
+                cmd.Parameters.Add("@idProduct", System.Data.SqlDbType.Int).Value = sale.idProduct;
+                cmd.Parameters.Add("@idStore", System.Data.SqlDbType.Money).Value = sale.idStore;
+                cmd.Parameters.Add("@quantity", System.Data.SqlDbType.Int).Value = sale.quantity;
+                cmd.Parameters.Add("@discount", System.Data.SqlDbType.Float).Value = sale.discount;
                 cmd.Parameters.Add("@total", System.Data.SqlDbType.Money).Value = sale.total;
 
                 int register = cmd.ExecuteNonQuery();
@@ -71,9 +72,9 @@ namespace Barberia.Areas.ApiRest.Models
             }
         }
 
-        public bool deleteSaleService(int id)
+        public bool deleteRegisterSale(int id)
         {
-            string query = "DELETE FROM saleServices WHERE id = @id";
+            string query = "DELETE FROM saleProduct WHERE id = @id";
             SqlConnection conn = new SqlConnection(cadena);
             SqlCommand cmd = new SqlCommand(query, conn);
 
@@ -99,12 +100,12 @@ namespace Barberia.Areas.ApiRest.Models
 
         }
 
-        public SaleServicesModel returnSaleService(int id)
+        public SaleProductModel returnRegisterSale(int id)
         {
-            string query = "SELECT idService, idStore, idEmploy, discount, total FROM saleServices WHERE id = @id";
+            string query = "SELECT idProduct, idStore, quantity, discount, total FROM saleProduct WHERE id = @id";
             SqlConnection conn = new SqlConnection(cadena);
             SqlCommand cmd = new SqlCommand(query, conn);
-            SaleServicesModel sale = new SaleServicesModel();
+            SaleProductModel sale = new SaleProductModel();
 
 
             try
@@ -116,12 +117,11 @@ namespace Barberia.Areas.ApiRest.Models
 
                 if (dr.Read())
                 {
-                    sale.idService = dr.GetInt32(0);
+                    sale.idProduct = dr.GetInt32(0);
                     sale.idStore = dr.GetInt32(1);
-                    sale.idEmploye = dr.GetInt32(2);
+                    sale.quantity = dr.GetInt32(2);
                     sale.discount = dr.GetDouble(3);
                     sale.total = dr.GetDecimal(4);
-
                 }
 
 
@@ -139,12 +139,12 @@ namespace Barberia.Areas.ApiRest.Models
 
 
         /*Modelos Con Join*/
-        public List<SaleServicesJoinModel> allSaleServices()
+        public List<SaleProductsJoinModel> allRegisterSale()
         {
-            string query = "SELECT ss.id, s.Name, t.Name,  e.name +' '+ e.firts_name, CONVERT(VARCHAR(10), ss.dataSale, 103), ss.discount, ss.total FROM saleServices ss, servicesCatalog s, storeCatalog t, employees e WHERE ss.idService = s.id AND ss.idStore = t.id AND ss.idEmploy = e.id";
+            string query = "SELECT s.id, p.name, t.name, s.quantity, s.discount, s.total,  CONVERT(VARCHAR(10), s.registerSale, 103) FROM saleProduct s, storeCatalog t, products p WHERE s.idProduct = p.id AND s.idStore = t.id";
             SqlConnection conn = new SqlConnection(cadena);
             SqlCommand cmd = new SqlCommand(query, conn);
-            List<SaleServicesJoinModel> saleService = new List<SaleServicesJoinModel>();
+            List<SaleProductsJoinModel> sale = new List<SaleProductsJoinModel>();
 
             try
             {
@@ -156,16 +156,17 @@ namespace Barberia.Areas.ApiRest.Models
                 {
 
 
-                    saleService.Add(new SaleServicesJoinModel
+                    sale.Add(new SaleProductsJoinModel
                     {
 
                         id = dr.GetInt32(0),
-                        nameService = dr.GetString(1),
+                        nameProduct = dr.GetString(1),
                         nameStore = dr.GetString(2),
-                        nameEmploye = dr.GetString(3),
-                        dateRegister = dr.GetString(4),
-                        discount = dr.GetDouble(5),
-                        total = dr.GetDecimal(6)
+                        quantity = dr.GetInt32(3),
+                        discount = dr.GetDouble(4),
+                        total = dr.GetDecimal(5),
+                        registerSale = dr.GetString(6)
+
                     });
 
                 }
@@ -179,7 +180,7 @@ namespace Barberia.Areas.ApiRest.Models
             {
                 conn.Close();
             }
-            return saleService;
+            return sale;
         }
     }
 }

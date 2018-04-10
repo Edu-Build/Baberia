@@ -159,6 +159,95 @@ namespace Barberia.Areas.ApiRest
                 new { controller = "ComboEmployees", action = "employees" }
             );
 
+
+            /*Combo tipos de Productos*/
+            context.MapRoute(
+                "accessComboTypeProduct",
+                "Api/ComTipoProducto",
+                new { controller = "ComboTypeProduct", action = "Types" }
+            );
+
+
+
+            /*Combo tipos de Marcas*/
+            context.MapRoute(
+                "accessComboBrandProduct",
+                "Api/ComMarcasProducto",
+                new { controller = "ComboBrandProduct", action = "Brands" }
+            );
+
+            /*Acciones Rest Productos */
+            context.MapRoute(
+                "accessProduct",
+                "Api/Productos/producto/{id}",
+                new { controller = "Products", action = "Product", id = UrlParameter.Optional }
+            );
+
+            /*Listado Rest Productos */
+            context.MapRoute(
+                "accessProducts",
+                "Api/Productos",
+                new { controller = "Products", action = "Products" }
+            );
+
+            /*Baja de Productos*/
+            context.MapRoute(
+                "accessProductDown",
+                "Api/Producto/Baja/{id}",
+                new { controller = "Products", action = "Down", id = UrlParameter.Optional }
+            );
+
+            /*Alta de productos*/
+            context.MapRoute(
+                "accessProductHigh",
+                "Api/Producto/Alta/{id}",
+                new { controller = "Products", action = "High", id = UrlParameter.Optional }
+            );
+
+            /*Baja de Productos*/
+            context.MapRoute(
+                "accessQuantity",
+                "Api/Producto/Cantidad/{id}",
+                new { controller = "Products", action = "Quantity", id = UrlParameter.Optional }
+            );
+
+
+            /*Combo  Productos*/
+            context.MapRoute(
+                "accessComboProduct",
+                "Api/ComProducto",
+                new { controller = "ComboProducts", action = "Products" }
+            );
+
+            /*Acciones Rest Compra de productos */
+            context.MapRoute(
+                "accessBuyedProduct",
+                "Api/CompraProductos/producto/{id}",
+                new { controller = "BuyedProducts", action = "Buyed", id = UrlParameter.Optional }
+            );
+
+            /*Listado Rest Compra de productos */
+            context.MapRoute(
+                "accessBuyedProducts",
+                "Api/CompraProductos",
+                new { controller = "BuyedProducts", action = "Buyeds" }
+            );
+
+            /*Acciones Rest Venta Productos */
+            context.MapRoute(
+                "accessSaleProduct",
+                "Api/RegistroProductos/Venta/{id}",
+                new { controller = "SaleProduct", action = "Sale", id = UrlParameter.Optional }
+            );
+
+            /*Listado Rest Listado Ventas Productos */
+            context.MapRoute(
+                "accessSaleProducts",
+                "Api/RegistroProductos",
+                new { controller = "SaleProduct", action = "Sales" }
+            );
+
+
             context.MapRoute(
                 "Api_default",
                 "Api/{controller}/{action}/{id}",

@@ -1,0 +1,72 @@
+﻿<div class="row">
+    <div class="col-md-12">
+        <h2 class="text-md-center mt-md-4">Registro de Venta de productos</h2>
+    </div>
+</div>
+
+<div>
+    <table class="table table-hover table-responsive " id="listRegisterSale">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Producto</th>
+                <th>Tienda</th>
+                <th>Cantidad</th>
+                <th>Descuento</th>
+                <th>Total</th>
+                <th>Registro Venta</th>
+                <th>Accion</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+
+
+
+<!-- Modal -->
+<!-- Modal Actualizar Registro-->
+<div class="modal fade" id="modalUpdateSaleProduct" tabindex="-1" role="dialog" aria-labelledby="modalUpdateLabelSaleProduct">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalUpdatelLabelSaleProduct">Formulario Modificacion de Producto</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label class="ml-4">Producto:</label>
+                            <select id="spProduct" class="form-control">
+                                <option selected>Elija Producto:</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="ml-4">Tienda:</label>
+                            <select id="spStore" class="form-control">
+                                <option value="">--Elija una Tienda--</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label class="ml-4">Cantidad Pagada:</label>
+                            <input type="text" class="form-control" id="spPay">
+                        </div>
+                    </div>
+                </form>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-danger" id="btnDeleteSaleProduct" data-dismiss="modal">Eliminar</button>
+                    <button type="submit" class="btn btn-warning" id="btnUpdateSaleProduct">Actualizar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

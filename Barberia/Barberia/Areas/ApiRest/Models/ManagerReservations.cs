@@ -76,7 +76,7 @@ namespace Barberia.Areas.ApiRest.Models
 
         public bool updateReservationProcess(int id)
         {
-            string query = "UPDATE reservations SET process = 'REALIZADA' WHERE id = @id";
+            string query = "UPDATE reservations SET process = 'EXITOSA..' WHERE id = @id";
             SqlConnection conn = new SqlConnection(cadena);
             SqlCommand cmd = new SqlCommand(query, conn);
 

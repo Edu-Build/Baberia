@@ -12,8 +12,9 @@
 
     <style>
 
-        .tables{ width: 85%; margin: 0 auto;}
+        .tables{ width: 90%; margin: 0 auto;}
         .registerSale{width : 85%; margin: 0 auto; border:1px dashed #30e2fb; background: #f1f1f1}
+        .tableBuyed{width: 85%; margin: 0 auto}
     
 
     </style>
@@ -30,10 +31,21 @@
         </a>
         <div class="collapse navbar-collapse" id="navbarToggleExternalContent">
             <ul class="navbar-nav ml-auto  mr-auto text-center">
-                <li class="nav-item ">@Html.ActionLink("Registro", "Index", "Admin", new { @class = "nav-link" })</li>
-                <li class="nav-item ">@Html.ActionLink("Servicios", "Service", "Admin", new { @class = "nav-link" })</li>
-                <li class="nav-item ">@Html.ActionLink("Reservaciones", "Reservation", "Admin", new { @class = "nav-link" })</li>
-                <li class="nav-item ">@Html.ActionLink("Empleados", "Employ", "Admin", new { @class = "nav-link" })</li>
+                <li class="nav-item ">@Html.ActionLink("Registro", "Index", "Admin",new { Area = "Admin" } ,new { @class = "nav-link" })</li>
+                <li class="nav-item ">@Html.ActionLink("Servicios", "Service", "Admin", new { Area = "Admin" }, new { @class = "nav-link" })</li>
+                <li class="nav-item ">@Html.ActionLink("Reservaciones", "Reservation", "Admin", new { Area = "Admin" }, new { @class = "nav-link" })</li>
+                <li class="nav-item ">@Html.ActionLink("Empleados", "Employe", "Admin", new { Area = "Admin" }, new { @class = "nav-link" })</li>
+                <li class="nav-item ">@Html.ActionLink("Ventas", "Sale", "Admin", new { Area = "Admin" }, new { @class = "nav-link" })</li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                       Inventario
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        @Html.ActionLink("Ventas", "SaleInventary", "Admin", new { Area = "Admin" }, new { @class = "dropdown-item" })
+                        @Html.ActionLink("Compras", "BuyedInventary", "Admin", new { Area = "Admin" }, new { @class = "dropdown-item" })
+                        @Html.ActionLink("Productos", "Products", "Admin", new { Area = "Admin" }, new { @class = "dropdown-item" })
+                    </div>
+                </li>
             </ul>
         
           <div class="d-flex flex-row justify-content-center">
@@ -92,10 +104,27 @@
             var idReservation = ''
             var idService = ''
             var idEmploye = ''
+            var idRegisterSalesr = ''
+            var idRegisterSaless = ''
+            var idSaleProduct = ''
+            var idRegisterSalesp = ''
+            var idProduct = ''
+            var idBuyed = ''
             comboService()
             combosrService()
             combosrEmploye()
             combosrNameCustomer()
+            combossService()
+            combossEmploye()
+            combosStore()
+            combospProduct()
+            combospStore()
+            comboBrand()
+            comboType()
+            comboBrandPa()
+            comboTypePa()
+            combosbProduct()
+            combosbaProduct()
             $('#rDate').datepicker({
                 uiLibrary: 'bootstrap4',
                 format: 'dd/mm/yyyy',
@@ -212,21 +241,1076 @@
                 updateEmploye(employe.id, JSON.stringify(employe))
 
             })
-            /*Registro de Venta*/
+            /*Registro de veenta de servicios*/
+            allRegisterSale()
+            $('#btnCreateSale').on('click', function () {
+
+                var register = new Object()
+
+                register.idService = $('#ssService').val()
+                register.idStore = $('#ssStore').val()
+                register.idEmploye = $('#ssEmploye').val()
+                register.discount = $('#ssDiscount').val()
+                register.total = $('#ssPay').val()
+
+                console.log(register)
+                createSaleService(JSON.stringify(register))
+
+            })
+            $(document).on('click', '#btnDeletessRegisterModal', function () {
+
+                idRegisterSaless = $(this).parents("tr").find("td").eq(0).html();
+            })
+            $('#btnDeletessRegister').on('click', function () {
+                deleteRegisterSale(idRegisterSaless)
+            })
+            $(document).on('click', '#btnSearchssRegisterModal', function () {
+                idRegisterSaless = $(this).parents("tr").find("td").eq(0).html();              
+                searchRegisterSale(idRegisterSaless)
+
+            })
+
+            $('#btnUpdatessRegister').on('click', function () {
+
+                var register = new Object()
+
+                register.id = idRegisterSaless
+                register.idService = $('#ssService').val()
+                register.idStore = $('#ssStore').val()
+                register.idEmploye = $('#ssEmploye').val()
+                register.total = $('#ssPay').val()
+                console.log(register)
+               
+             
+                updataRegisterSale(idRegisterSaless, JSON.stringify(register))
+
+            })
+            /*Registro de Venta con reservacion*/
+            allRegisterReservationSale()
             $(document).on('click', "#srRegister", function () {
 
                 var id = $('#srReservation').val()
-                alert(id)
                 searchRegister(id)
+            })
+            $('#btnCreateSR').on('click', function () {
+
+                var registerSale = new Object()
+
+                registerSale.idReservation = $('#srReservation').val()
+                registerSale.idEmploye = $('#srEmploye').val()
+                registerSale.idService = $('#srService').val()
+                registerSale.discount = $('#srDiscount').val()
+                registerSale.total= $('#srPay').val()
+                
+                createReservation(JSON.stringify(registerSale))
+                updateProcess(registerSale.idReservation)
+            })
+            $(document).on('click', '#btnDeletesrReservationModal', function () {
+
+                idRegisterSalesr = $(this).parents("tr").find("td").eq(0).html();
+            })
+            $('#btnDeletesrRegister').on('click', function () {
+                deleteRegisterReservationSale(idRegisterSalesr)
+            })
+
+            $(document).on('click', '#btnSearchsrReservationModal', function () {
+                idRegisterSalesr = $(this).parents("tr").find("td").eq(0).html();
+                searchRegisterSaleReservation(idRegisterSalesr)
+
+            })
+
+            $('#btnUpdatesrRegister').on('click', function () {
+
+                var register = new Object()
+
+                register.id = idRegisterSalesr
+                register.idReservation = $('#srReservation').val()
+                register.idEmploye = $('#srEmploye').val()
+                register.total = $('#srPay').val()
+                console.log(register)
+
+
+                updataRegisterSaleReservation(idRegisterSalesr, JSON.stringify(register))
+
+            })
+
+            /*-----------------------------------INVENTARIO-------------------------------------*/
+            
+            /*Ventas*/
+            allSaleProduct()
+
+            $('#btnspRegister').on('click', function () {
+
+                id = $('#spProduct').val()
+
+                console.log(id)
+                var registerSale = new Object()
+
+                registerSale.idProduct = id
+                registerSale.idStore = $('#spStore').val()
+                registerSale.quantity = $('#spQuantity').val()
+                registerSale.discount = 0
+                registerSale.total = $('#spPay').val()
+
+                var down = new Object()
+
+                down.id = id
+                down.quantity = $('#spQuantity').val()
+
+                createSaleProduct(JSON.stringify(registerSale))
+                updateDownProduct(id, JSON.stringify(down))
+
+            })
+        
+            $(document).on('click', '#btnSearchSaleProductModal', function () {
+                idRegisterSalesp = $(this).parents("tr").find("td").eq(0).html();
+
+                console.log(idRegisterSalesp)
+                searchRegisterSaleProduct(idRegisterSalesp)
+            })
+
+            $('#btnUpdatesrRegister').on('click', function () {
+
+                var registerSale = new Object()
+
+                registerSale.idProduct = id
+                registerSale.idStore = $('#spStore').val()
+                registerSale.quantity = $('#spQuantity').val()
+                registerSale.discount = 0
+                registerSale.total = $('#spPay').val()
+
+
+                updateRegisterSaleReservation(idRegisterSalesp, JSON.stringify(register))
+
+            })
+            $(document).on('click', '#btnDeleteSaleProduct', function () {
+
+                var high = Object()
+
+
+                high.idProduct = $('#spProduct').val()
+                high.quantity = $('#spQuantity').val()
+
+                console.log(high)
+                updateHighProduct(high.idProduct, JSON.stringify(high))
+                deleteSaleProduct(idRegisterSalesp)
+            })
+
+            /*Productos*/
+            allProduct()
+
+            $('#btnCreateProduct').on('click', function () {
+
+
+                var product = new Object()
+
+
+
+                product.idBrand = $('#pBrand').val()
+                product.idType = $('#pType').val()
+                product.name = $('#pName').val()
+                product.description = $('#pDescription').val()
+                product.salePrice = $('#pPrice').val()
+                product.quantity = 0
+
+
+                console.log(product)
+                createProduct(JSON.stringify(product))
             })
 
 
+            $(document).on('click', '#btnSearchProductModal', function () {
+                idProduct = $(this).parents("tr").find("td").eq(0).html();
+
+                console.log(idProduct)
+                searchProduct(idProduct)
+            })
+
+            $('#btnUpdateProduct').on('click', function () {
+
+                var product = new Object()
+
+
+
+                product.idBrand = $('#paBrand').val()
+                product.idType = $('#paType').val()
+                product.name = $('#paName').val()
+                product.description = $('#paDescription').val()
+                product.salePrice = $('#paPrice').val()
+                product.quantity = $('#paQuantity').val()
+
+                console.log(product)
+                updateProduct(idProduct, JSON.stringify(product))
+
+            })
+           
+            $(document).on('click', '#btnDeleteProductModal', function () {
+
+                idProduct = $(this).parents("tr").find("td").eq(0).html();
+            })
+            $('#btnDeleteProduct').on('click', function () {
+                deleteProduct(idProduct)
+            })
+
+            /*Compras*/
+            allBuyed()
+            $('#btnCreateBuyed').on('click', function () {
+
+
+                var buyed = new Object()
+                buyed.idProduct = $('#bProduct').val()
+                buyed.priceBuy = $('#bBuyed').val()
+                buyed.quantity = $('#bQuantity').val()
+
+                var high = new Object()
+                high.id = $('#bProduct').val()
+                high.quantity = $('#bQuantity').val()
+
+                console.log(high)
+                console.log(buyed)
+                updateHighProduct(high.id, JSON.stringify(high))
+                createBuyedProduct(JSON.stringify(buyed))
+            })
+
+            $(document).on('click', '#btnSearchBuyedModal', function () {
+                idBuyed = $(this).parents("tr").find("td").eq(0).html();
+
+                console.log(idBuyed)
+                searchBuyedProduct(idBuyed)
+            })
+
+            $('#btnUpdateBuyed').on('click', function () {
+
+                var buyed = new Object()
+                buyed.id = idBuyed
+                buyed.idProduct = $('#baProduct').val()
+                buyed.priceBuy = $('#baBuyed').val()
+                buyed.quantity = $('#baQuantity').val()
+
+                console.log(buyed)
+                updateBuyedProduct(idBuyed, JSON.stringify(buyed))
+
+            })
+
+
+            $(document).on('click', '#btnDeleteBuyedModal', function () {
+
+                idBuyed = $(this).parents("tr").find("td").eq(0).html();
+            })
+            $('#btnDeleteBuyed').on('click', function () {
+                deleteBuyedProduct(idBuyed)
+            })
         })
 
 
 
+/*---------------------------------------------------------------INICIAN FUNCIONES DE COMPRA DE INVENTARIO--------------------------------------------------------------*/
 
-/*---------------------------------------------------------------INICIAN FUNCIONES DE REGISTRO--------------------------------------------------------------*/
+
+        /*LISTA DE TODAS LAS VENTAS*/
+        function allBuyed() {
+            $('#listBuyed').DataTable({
+                'stateSave': true,
+                'scrollY': '600px',
+                'scrollCollapse': false,
+                'paging': false,
+                'destroy': true,
+                'ajax': {
+                    'url': '../../Api/CompraProductos',
+                    'type': 'GET',
+                    'dataType': 'json'
+                },
+                "columns": [
+
+                    { "data": "id" },
+                    { "data": "nameProduct" },
+                    { "data": "priceBuy" },
+                    { "data": "quantity" },
+                    { "data": "register" },
+                    {
+                        "defaultContent":
+
+                                "<button type='button' id='btnDeleteBuyedModal' class='btn btn-danger mr-1' data-toggle='modal' data-target='#modalDeleteBuyed' >Eliminar</button>" +
+                                "<button type='button' id='btnSearchBuyedModal' class='btn btn-warning '    data-toggle='modal' data-target='#modalUpdateBuyed'>Modificar</button>"
+                    },
+                ],
+                'ServerSide': true,
+                'dom': 'Bfrtip',
+                'buttons': [
+                    {
+                        'extend': 'excelHtml5',
+                        'text': 'Reporte Excel',
+                        'titleAttr': 'Excel'
+
+                    },
+                ],
+                'language': traduccion_espaniol
+
+            })
+        }
+
+        /*DESPLIEGUE DE PRODUCTOS*/
+        function combosbProduct() {
+            var url = '../../Api/ComProducto'
+            var value = ''
+            $.getJSON(url, function (data) {
+                $.each(data, function (key, item) {
+                    value += '<option value=' + item.id + '> ' + item.name + '</option>'
+                })
+                $('#bProduct').append(value)
+            })
+        }
+
+
+        /*DESPLIEGUE DE PRODUCTOS*/
+        function combosbaProduct() {
+            var url = '../../Api/ComProducto'
+            var value = ''
+            $.getJSON(url, function (data) {
+                $.each(data, function (key, item) {
+                    value += '<option value=' + item.id + '> ' + item.name + '</option>'
+                })
+                $('#baProduct').append(value)
+            })
+        }
+
+
+        /*CREACION REGISTRO DE COMPRA DE PRODUCTO*/
+        function createBuyedProduct(register) {
+            $.ajax({
+
+                url: "../../Api/CompraProductos/producto",
+                type: "POST",
+                contentType: "application/json; charset= utf-8",
+                data: register,
+                dataType: "json",
+                statusCode: {
+                    200: function () {
+                        alert("Registro de Compra Exitoso")
+                        location.reload()
+                    },
+                    400: function () {
+
+                        alert("Registro de Compra no Exitoso")
+                        location.reload()
+
+                    }
+                }
+            })
+        }
+
+
+        /*ACTUALIZACION DE REGISTRO DE VENTA*/
+        function updateHighProduct(id, high) {
+            var url = '../../Api/Producto/Alta/' + id
+            $.ajax({
+                url: url,
+                type: 'PUT',
+                data: high,
+                contentType: 'application/json;chartset=utf-8',
+                statusCode: {
+                    200: function () {
+                        alert('Cantidad de productos en existencia Actualizada')
+                        location.reload()
+                    },
+                    404: function () {
+                        alert('Registro  no fue encontrado')
+                        location.reload()
+                    },
+                    500: function () {
+                        alert('Error')
+                        location.reload()
+                    }
+                }
+            });
+        }
+
+
+        /*ACTUALIZACION DE REGISTRO DE VENTA*/
+        function updateBuyedProduct(id, register) {
+            var url = '../../Api/CompraProductos/producto/' + id
+            $.ajax({
+                url: url,
+                type: 'PUT',
+                data: register,
+                contentType: 'application/json;chartset=utf-8',
+                statusCode: {
+                    200: function () {
+                        alert('Registro con ' + id + ' fue actualizado exitosamente')
+                        location.reload()
+                    },
+                    404: function () {
+                        alert('Registro con ' + id + ' no fue encontrado')
+                        location.reload()
+                    },
+                    400: function () {
+                        alert('Error')
+                        location.reload()
+                    }
+                }
+            });
+        }
+
+
+        /*BUSQUEDA DE VENTA POR ID*/
+        function searchBuyedProduct(id) {
+            var url = '../../Api/CompraProductos/producto/' + id
+            $.getJSON(url)
+                .done(function (data) {
+                    $('#baProduct').val(data.idProduct)
+                    $('#baBuyed').val(data.priceBuy)
+                    $('#baQuantity').val(data.quantity)
+                })
+                .fail(function (erro) {
+                    Console.log("Producto no encontrado")
+                })
+        }
+
+
+
+        /*ELIMINACION DE REGISTRO DE VENTA*/
+        function deleteBuyedProduct(id) {
+            var url = '../../Api/CompraProductos/producto/' + id
+            $.ajax({
+                url: url,
+                type: 'DELETE',
+                contentType: 'application/json;chartset=utf-8',
+                statusCode: {
+                    200: function () {
+
+                        alert('El registro  fue Exitosamente eliminada')
+                        location.reload();
+                    },
+                    404: function () {
+
+                        alert('El registro con el: ' + id + ' no pudo ser eliminado')
+                        location.reload()
+                    }
+                }
+            })
+        }
+
+
+
+
+
+/*---------------------------------------------------------------FINALIZAN FUNCIONES DE COMPRA DE INVENTARIO------------------------------------------------------------*/
+
+
+
+
+
+/*---------------------------------------------------------------INICIAN FUNCIONES DE PRODUCTOS--------------------------------------------------------------*/
+
+
+        /*LISTA DE TODAS LAS VENTAS*/
+        function allProduct() {
+            $('#listProducts').DataTable({
+                'stateSave': true,
+                'scrollY': '600px',
+                'scrollCollapse': false,
+                'paging': false,
+                'destroy': true,
+                'ajax': {
+                    'url': '../../Api/Productos',
+                    'type': 'GET',
+                    'dataType': 'json'
+                },
+                "columns": [
+
+                    { "data": "id" },
+                    { "data": "nameProduct" },
+                    { "data": "nameBrand" },
+                    { "data": "nameType" },
+                    { "data": "description" },
+                    { "data": "salePrice" },
+                    { "data": "quantity" },
+                    {
+                        "defaultContent":
+
+                                "<button type='button' id='btnDeleteProductModal' class='btn btn-danger mr-1' data-toggle='modal' data-target='#modalDeleteProduct' >Eliminar</button>" +
+                                "<button type='button' id='btnSearchProductModal' class='btn btn-warning '    data-toggle='modal' data-target='#modalUpdateProduct'>Modificar</button>"
+                    },
+                ],
+                'ServerSide': true,
+                'dom': 'Bfrtip',
+                'buttons': [
+                    {
+                        'extend': 'excelHtml5',
+                        'text': 'Reporte Excel',
+                        'titleAttr': 'Excel'
+
+                    },
+                ],
+                'language': traduccion_espaniol
+
+            })
+        }
+
+
+
+
+
+        /*DESPLIEGUE DE MARCAS*/
+        function comboBrand() {
+            var url = '../../Api/ComMarcasProducto'
+            var value = ''
+            $.getJSON(url, function (data) {
+                $.each(data, function (key, item) {
+                    value += '<option value=' + item.id + '> ' + item.name + '</option>'
+                })
+                $('#pBrand').append(value)
+            })
+        }
+
+        /*DESPLIEGUE DE TIPOS DE PRODUCTO*/
+        function comboType() {
+            var url = "../../Api/ComTipoProducto"
+            var value = ""
+            $.getJSON(url, function (data) {
+                $.each(data, function (key, item) {
+                    value += '<option value=' + item.id + '> ' + item.name + '</option>'
+                })
+                $('#pType').append(value)
+            })
+        }
+
+
+
+        /*DESPLIEGUE DE MARCAS*/
+        function comboBrandPa() {
+            var url = '../../Api/ComMarcasProducto'
+            var value = ''
+            $.getJSON(url, function (data) {
+                $.each(data, function (key, item) {
+                    value += '<option value=' + item.id + '> ' + item.name + '</option>'
+                })
+                $('#paBrand').append(value)
+            })
+        }
+
+        /*DESPLIEGUE DE TIPOS DE PRODUCTO*/
+        function comboTypePa() {
+            var url = "../../Api/ComTipoProducto"
+            var value = ""
+            $.getJSON(url, function (data) {
+                $.each(data, function (key, item) {
+                    value += '<option value=' + item.id + '> ' + item.name + '</option>'
+                })
+                $('#paType').append(value)
+            })
+        }
+
+
+
+
+        /*CREACION REGISTRO DE VENTA DE PRODUCTO*/
+        function createProduct(register) {
+            $.ajax({
+
+                url: "../../Api/Productos/producto/",
+                type: "POST",
+                contentType: "application/json; charset= utf-8",
+                data: register,
+                dataType: "json",
+                statusCode: {
+                    200: function () {
+                        alert("Registro de producto Exitoso")
+                        location.reload()
+                    },
+                    400: function () {
+
+                        alert("Registro de producto no Exitoso")
+                        location.reload()
+
+                    }
+                }
+            })
+        }
+
+
+        /*ACTUALIZACION DE REGISTRO DE VENTA*/
+        function updateProduct(id, register) {
+            var url = '../../Api/Productos/producto/' + id
+            $.ajax({
+                url: url,
+                type: 'PUT',
+                data: register,
+                contentType: 'application/json;chartset=utf-8',
+                statusCode: {
+                    200: function () {
+                        alert('Producto con ' + id + ' fue actualizado exitosamente')
+                        location.reload()
+                    },
+                    404: function () {
+                        alert('Producto con ' + id + ' no fue encontrado')
+                        location.reload()
+                    },
+                    400: function () {
+                        alert('Error')
+                        location.reload()
+                    }
+                }
+            });
+        }
+
+
+        /*BUSQUEDA DE VENTA POR ID*/
+        function searchProduct(id) {
+            var url = '../../Api/Productos/producto/' + id
+            $.getJSON(url)
+                .done(function (data) {
+
+
+                    $('#paBrand').val(data.idBrand)
+                    $('#paType').val(data.idType)
+                    $('#paName').val(data.name)
+                    $('#paDescription').val(data.description)
+                    $('#paPrice').val(data.salePrice)
+                    $('#paQuantity').val(data.quantity)
+
+
+                })
+                .fail(function (erro) {
+                    Console.log("Producto no encontrado")
+                })
+        }
+
+
+        /*ELIMINACION DE REGISTRO DE VENTA*/
+        function deleteProduct(id) {
+            var url = '../../Api/Productos/producto/' + id
+            $.ajax({
+                url: url,
+                type: 'DELETE',
+                contentType: 'application/json;chartset=utf-8',
+                statusCode: {
+                    200: function () {
+
+                        alert('El registro  fue Exitosamente eliminada')
+                        location.reload();
+                    },
+                    404: function () {
+
+                        alert('El registro con el: ' + id + ' no pudo ser eliminado')
+                        location.reload()
+                    }
+                }
+            })
+        }
+
+
+
+/*---------------------------------------------------------------FINALIZAN FUNCIONES DE PRODUCTOS------------------------------------------------------------*/
+
+
+
+/*---------------------------------------------------------------INICIAN FUNCIONES VENTA DE INVENTARIO--------------------------------------------------------------*/
+
+
+        /*LISTA DE TODAS LAS VENTAS*/
+        function allSaleProduct() {
+            $('#listRegisterSale').DataTable({
+                'stateSave': true,
+                'scrollY': '600px',
+                'scrollCollapse': false,
+                'paging': false,
+                'destroy': true,
+                'ajax': {
+                    'url': '../../Api/RegistroProductos',
+                    'type': 'GET',
+                    'dataType': 'json'
+                },
+                "columns": [
+
+                    { "data": "id" },
+                    { "data": "nameProduct" },
+                    { "data": "nameStore" },
+                    { "data": "quantity" },
+                    { "data": "discount" },
+                    { "data": "total" },
+                    { "data": "registerSale" },
+                    {
+                        "defaultContent":
+
+             
+                                "<button type='button' id='btnSearchSaleProductModal' class='btn btn-warning '    data-toggle='modal' data-target='#modalUpdateSaleProduct'>Modificar</button>"
+                    },
+                ],
+                'ServerSide': true,
+                'dom': 'Bfrtip',
+                'buttons': [
+                    {
+                        'extend': 'excelHtml5',
+                        'text': 'Reporte Excel',
+                        'titleAttr': 'Excel'
+
+                    },
+                ],
+                'language': traduccion_espaniol
+
+            })
+        }
+
+
+
+        /*DESPLIEGUE DE PRODUCTOS*/
+        function combospProduct() {
+            var url = '../../Api/ComProducto'
+            var value = ''
+            $.getJSON(url, function (data) {
+                $.each(data, function (key, item) {
+                    value += '<option value=' + item.id + '> ' + item.name + '</option>'
+                })
+                $('#spProduct').append(value)
+            })
+        }
+
+        /*DESPLIEGUE DE VENTA*/
+        function combospStore() {
+            var url = "../../Api/ComTienda"
+            var value = ""
+            $.getJSON(url, function (data) {
+                $.each(data, function (key, item) {
+                    value += '<option value=' + item.id + '> ' + item.name + '</option>'
+                })
+                $('#spStore').append(value)
+            })
+        }
+
+        /*CREACION REGISTRO DE VENTA DE PRODUCTO*/
+        function createSaleProduct(register) {
+            $.ajax({
+
+                url: "../../Api/RegistroProductos/Venta",
+                type: "POST",
+                contentType: "application/json; charset= utf-8",
+                data: register,
+                dataType: "json",
+                statusCode: {
+                    200: function () {
+                        alert("Registro de venta Exitoso")
+                        location.reload()
+                    },
+                    400: function () {
+
+                        alert("Registro de venta no Exitoso")
+                        location.reload()
+
+                    }
+                }
+            })
+        }
+
+        /*ACTUALIZACION DE REGISTRO DE VENTA*/
+        function updateHighProduct(id, high) {
+            var url = '../../Api/Producto/Alta/' + id
+            $.ajax({
+                url: url,
+                type: 'PUT',
+                data: high,
+                contentType: 'application/json;chartset=utf-8',
+                statusCode: {
+                    200: function () {
+                        alert('Cantidad de productos en existencia Actualizada')
+                        location.reload()
+                    },
+                    404: function () {
+                        alert('Registro  no fue encontrado')
+                        location.reload()
+                    },
+                    500: function () {
+                        alert('Error')
+                        location.reload()
+                    }
+                }
+            });
+        }
+
+        /*ACTUALIZACION DE PRODUCTOS EN EXISTENCIA*/
+        function updateDownProduct(id, down) {
+            var url = '../../Api/Producto/Baja/' + id
+            $.ajax({
+                url: url,
+                type: 'PUT',
+                data: down,
+                contentType: 'application/json;chartset=utf-8',
+                statusCode: {
+                    200: function () {
+                        alert('Cantidad de productos en existencia Actualizada')
+                        location.reload()
+                    },
+                    404: function () {
+                        alert('Registro  no fue encontrado')
+                        location.reload()
+                    },
+                    500: function () {
+                        alert('Error')
+                        location.reload()
+                    }
+                }
+            });
+        }
+
+        /*ELIMINACION DE REGISTRO DE VENTA*/
+        function deleteSaleProduct(id) {
+            var url = '../../Api/RegistroProductos/Venta/' + id
+            $.ajax({
+                url: url,
+                type: 'DELETE',
+                contentType: 'application/json;chartset=utf-8',
+                statusCode: {
+                    200: function () {
+
+                        alert('El registro  fue Exitosamente eliminada')
+                        location.reload();
+                    },
+                    404: function () {
+
+                        alert('El registro con el: ' + id + ' no pudo ser eliminado')
+                        location.reload()
+                    }
+                }
+            })
+        }
+
+        /*ACTUALIZACION DE REGISTRO DE VENTA*/
+        function updateRegisterSaleProduct(id, register) {
+            var url = '../../Api/RegistroProductos/Venta/' + id
+            $.ajax({
+                url: url,
+                type: 'PUT',
+                data: register,
+                contentType: 'application/json;chartset=utf-8',
+                statusCode: {
+                    200: function () {
+                        alert('Registro con ' + id + ' fue actualizado exitosamente')
+                        location.reload()
+                    },
+                    404: function () {
+                        alert('Registro con ' + id + ' no fue encontrado')
+                        location.reload()
+                    },
+                    400: function () {
+                        alert('Error')
+                        location.reload()
+                    }
+                }
+            });
+        }
+
+        /*BUSQUEDA DE VENTA POR ID*/
+        function searchRegisterSaleProduct(id) {
+            var url = '../../Api/RegistroProductos/Venta/' + id
+            $.getJSON(url)
+                .done(function (data) {
+                  
+                    $('#spProduct').val(data.idProduct)
+                    $('#spStore').val(data.idStore)
+                    $('#spQuantity').val(data.quantity)
+                    $('#spPay').val(data.total)
+
+
+                })
+                .fail(function (erro) {
+                    Console.log("Cliente no encontrado")
+                });
+        };
+
+
+
+
+
+
+
+/*---------------------------------------------------------------FINALIZAN FUNCIONES DE VENTA  DE INVENTARIO------------------------------------------------------------*/
+
+
+
+
+
+/*---------------------------------------------------------------INICIAN FUNCIONES DE REGISTRO VENTA--------------------------------------------------------------*/
+
+        /*DESPLIEGUE DE SERVICIOS*/
+        function combossService() {
+            var url = '../../Api/ComServicio'
+            var value = ''
+            $.getJSON(url, function (data) {
+                $.each(data, function (key, item) {
+                    value += '<option value=' + item.id + '> ' + item.name + '</option>'
+                })
+                $('#ssService').append(value)
+            })
+        }
+
+        /*DESPLIEGUE DE EMPLEADOS*/
+        function combossEmploye() {
+            var url = '../../Api/ComEmpleados'
+            var value = ''
+            $.getJSON(url, function (data) {
+                $.each(data, function (key, item) {
+                    value += '<option value=' + item.id + '> ' + item.name + '</option>'
+                })
+                $('#ssEmploye').append(value)
+            })
+        }
+
+        /*CREACION DE REGISTRO DE VENTA SERVICIO*/
+        function createSaleService(register) {
+            $.ajax({
+
+                url: "../../Api/VentaServicios/Venta",
+                type: "POST",
+                contentType: "application/json; charset= utf-8",
+                data: register,
+                dataType: "json",
+                statusCode: {
+                    200: function () {
+                        alert("Registro de venta Exitoso")
+                        location.reload()
+                    },
+                    400: function () {
+
+                        alert("Registro de venta no Exitoso")
+                        location.reload()
+
+                    }
+                }
+            })
+        }
+
+        /*DESPLIEGUE DE VENTA*/
+        function combosStore() {
+            var url = "../../Api/ComTienda"
+            var value = ""
+            $.getJSON(url, function (data) {
+                $.each(data, function (key, item) {
+                    value += '<option value=' + item.id + '> ' + item.name + '</option>'
+                })
+                $('#ssStore').append(value)
+            })
+        }
+
+
+        /*LISTA DE TODAS LAS VENTAS*/
+        function allRegisterSale() {
+            $('#listSale').DataTable({
+                'stateSave': true,
+                'scrollY': '600px',
+                'scrollCollapse': false,
+                'paging': false,
+                'destroy': true,
+                'ajax': {
+                    'url': '../../Api/VentaServicios',
+                    'type': 'GET',
+                    'dataType': 'json'
+                },
+                "columns": [
+
+                    { "data": "id" },
+                    { "data": "nameService" },
+                    { "data": "nameStore" },
+                    { "data": "nameEmploye" },
+                    { "data": "dateRegister" },
+                    { "data": "discount" },
+                    { "data": "total" },
+                    {
+                        "defaultContent":
+
+                                "<button type='button' id='btnDeletessRegisterModal' class='btn btn-danger mr-1' data-toggle='modal' data-target='#modalDeletessRegister' >Eliminar</button>" +
+                                "<button type='button' id='btnSearchssRegisterModal' class='btn btn-warning '    data-toggle='modal' data-target='#modalUpdatessRegister'>Modificar</button>"
+                    },
+                ],
+                'ServerSide': true,
+                'dom': 'Bfrtip',
+                'buttons': [
+                    {
+                        'extend': 'excelHtml5',
+                        'text': 'Reporte Excel',
+                        'titleAttr': 'Excel'
+
+                    },
+                ],
+                'language': traduccion_espaniol
+
+            })
+        }
+
+
+        /*ELIMINACION DE REGISTRO DE VENTA*/
+        function deleteRegisterSale(id) {
+            var url = '../../Api/VentaServicios/Venta/' + id
+            $.ajax({
+                url: url,
+                type: 'DELETE',
+                contentType: 'application/json;chartset=utf-8',
+                statusCode: {
+                    200: function () {
+
+                        alert('El registro  con  el: ' + id + ' fue Exitosamente eliminada')
+                        location.reload();
+                    },
+                    404: function () {
+
+                        alert('El registro con el: ' + id + ' no pudo ser eliminado')
+                        location.reload()
+                    }
+                }
+            })
+        }
+
+        /*BUSQUEDA DE VENTA POR ID*/
+        function searchRegisterSale(id) {
+            var url = '../../Api/VentaServicios/Venta/' + id
+            $.getJSON(url)
+                .done(function (data) {
+
+
+                    $('#ssService').val(data.idService)
+                    $('#ssStore').val(data.idStore)
+                    $('#ssEmploye').val(data.idEmploye)
+                    $('#ssPay').val(data.total)
+
+
+                })
+                .fail(function (erro) {
+                    Console.log("Cliente no encontrado")
+                });
+        };
+
+
+        /*ACTUALIZACION DE REGISTRO DE VENTA*/
+        function updataRegisterSale(id, register) {
+            var url = '../../Api/VentaServicios/Venta/' + id
+            $.ajax({
+                url: url,
+                type: 'PUT',
+                data: register,
+                contentType: 'application/json;chartset=utf-8',
+                statusCode: {
+                    200: function () {
+                        alert('Registro con ' + id + ' fue actualizado exitosamente')
+                        location.reload()
+                    },
+                    404: function () {
+                        alert('Registro con ' + id + ' no fue encontrado')
+                        location.reload()
+                    },
+                    400: function () {
+                        alert('Error')
+                        location.reload()
+                    }
+                }
+            })
+        }
+
+
+
+
+/*---------------------------------------------------------------FINALIZAN FUNCIONES DE REGISTRO vENTA------------------------------------------------------------*/
+
+
+/*---------------------------------------------------------------INICIAN FUNCIONES DE REGISTRO DE VENTA CON RESERVACION--------------------------------------------------------------*/
 
         /*DESPLIEGUE DE CLIENTES CON FORMULARIO */
         function combosrNameCustomer() {
@@ -240,7 +1324,7 @@
             })
         }
         
-        /*DESPLIEGUE DE INFORMACION*/
+        /*DESPLIEGUE DE SERVICIOS*/
         function combosrService() {
             var url = '../../Api/ComServicio'
             var value = ''
@@ -273,8 +1357,8 @@
                 .done(function (data) {
 
 
-                    $('#srService').val(idService)
-                    $('#srPay').val(price)
+                    $('#srService').val(data.idService)
+                    $('#srPay').val(data.price)
                    
 
                 })
@@ -284,8 +1368,170 @@
         };
 
 
+        /*CREACION DE REGISTRO DE VENTA CON RESERVACION*/
+        function createReservation(registerSale) {
+            $.ajax({
 
-/*---------------------------------------------------------------FINALIZAN FUNCIONES DE REGISTRO------------------------------------------------------------*/
+                url: "../../Api/VentasReservacion/Venta",
+                type: "POST",
+                contentType: "application/json; charset= utf-8",
+                data: registerSale,
+                dataType: "json",
+                statusCode: {
+                    200: function () {
+                        alert("Registro de venta Exitoso")
+                        location.reload()
+                    },
+                    400: function () {
+
+                        alert("Registro de venta no Exitoso")
+                        location.reload()
+
+                    }
+                }
+            })
+        }
+
+        /*ACTUALIZACION DE PROCESO DE RESERVATION*/
+        function updateProcess(id, employe) {
+            var url = '../../Api/Actualizar/Proceso/' + id
+            $.ajax({
+                url: url,
+                type: 'PUT',
+                data: employe,
+                contentType: 'application/json;chartset=utf-8',
+                statusCode: {
+                    200: function () {
+                        alert('El empleado con ' + id + ' fue actualizado exitosamente')
+                        location.reload()
+                    },
+                    404: function () {
+                        alert('El Empleado con ' + id + ' no fue encontrado')
+                        location.reload()
+                    },
+                    400: function () {
+                        alert('Error')
+                        location.reload()
+                    }
+                }
+            });
+        }
+
+        /*LISTA DE TODAS LAS VENTAS CON RESERVACION*/
+        function allRegisterReservationSale() {
+            $('#listSaleReservation').DataTable({
+                'stateSave': true,
+                'scrollY': '600px',
+                'scrollCollapse': false,
+                'paging': false,
+                'destroy': true,
+                'ajax': {
+                    'url': '../../Api/VentasReservacion',
+                    'type': 'GET',
+                    'dataType': 'json'
+                },
+                "columns": [
+
+                    { "data": "id" },
+                    { "data": "nameReservation" },
+                    { "data": "nameService" },
+                    { "data": "nameStore" },
+                    { "data": "nameEmploye" },
+                    { "data": "dateRegister" },
+                    { "data": "discount" },
+                    { "data": "total" },
+                    {
+                        "defaultContent":
+
+                                "<button type='button' id='btnDeletesrReservationModal' class='btn btn-danger mr-1' data-toggle='modal' data-target='#modalRegisterReservation' >Eliminar</button>" +
+                                "<button type='button' id='btnSearchsrReservationModal' class='btn btn-warning ' data-toggle='modal' data-target='#modalUpdatesrReservation' >Modificar</button>"
+                    },
+                ],
+                'ServerSide': true,
+                'dom': 'Bfrtip',
+                'buttons': [
+                    {
+                        'extend': 'excelHtml5',
+                        'text': 'Reporte Excel',
+                        'titleAttr': 'Excel'
+
+                    },
+                ],
+                'language': traduccion_espaniol
+
+            })
+        }
+
+
+
+
+        /*ELIMINACION DE REGISTRO DE VENTA CON  RESERVACION*/
+        function deleteRegisterReservationSale(id) {
+            var url = '../../Api/VentasReservacion/Venta/' + id
+            $.ajax({
+                url: url,
+                type: 'DELETE',
+                contentType: 'application/json;chartset=utf-8',
+                statusCode: {
+                    200: function () {
+
+                        alert('El registro  con  el: ' + id + ' fue Exitosamente eliminada')
+                        location.reload();
+                    },
+                    404: function () {
+
+                        alert('El registro con el: ' + id + ' no pudo ser eliminado')
+                        location.reload()
+                    }
+                }
+            })
+        }
+
+
+        /*BUSQUEDA DE VENTA CON RESERVACION  POR ID*/
+        function searchRegisterSaleReservation(id) {
+            var url = '../../Api/VentasReservacion/Venta/' + id
+            $.getJSON(url)
+                .done(function (data) {
+
+
+                    $('#srReservation').val(data.idReservation)
+                    $('#srEmploye').val(data.idEmploye)
+                    $('#srPay').val(data.total)
+
+
+                })
+                .fail(function (erro) {
+                    Console.log("Cliente no encontrado")
+                });
+        };
+
+        /*ACTUALIZACION DE REGISTRO DE VENTA*/
+        function updataRegisterSaleReservation(id, register) {
+            var url = '../../Api/VentasReservacion/Venta/' + id
+            $.ajax({
+                url: url,
+                type: 'PUT',
+                data: register,
+                contentType: 'application/json;chartset=utf-8',
+                statusCode: {
+                    200: function () {
+                        alert('Registro con ' + id + ' fue actualizado exitosamente')
+                        location.reload()
+                    },
+                    404: function () {
+                        alert('Registro con ' + id + ' no fue encontrado')
+                        location.reload()
+                    },
+                    400: function () {
+                        alert('Error')
+                        location.reload()
+                    }
+                }
+            });
+        }
+
+/*---------------------------------------------------------------FINALIZAN FUNCIONES DE REGISTRO DE VENTA CON RESERVACION------------------------------------------------------------*/
 
 
 
@@ -364,7 +1610,7 @@
                         location.reload()
                     }
                 }
-            });
+            })
         }
 
 
@@ -540,7 +1786,7 @@
                     200: function () {
 
                         alert('El servicio  con  el: ' + id + ' fue Exitosamente eliminada')
-                        location.reload();
+                        location.reload()
                     },
                     404: function () {
 

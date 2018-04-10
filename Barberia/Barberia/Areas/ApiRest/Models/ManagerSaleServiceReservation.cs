@@ -44,7 +44,7 @@ namespace Barberia.Areas.ApiRest.Models
 
         public bool updateSaleReservations(SaleServiceReservationModel sale)
         {
-            string query = "UPDATE saleServicesReservation SET idReservation = @idReservation, idEmploye = @idEmploye, discount = @discount, total = @total  WHERE id = @id";
+            string query = "UPDATE saleServicesReservation SET idReservation = @idReservation, idEmploy = @idEmploye, discount = @discount, total = @total  WHERE id = @id";
             SqlConnection conn = new SqlConnection(cadena);
             SqlCommand cmd = new SqlCommand(query, conn);
 

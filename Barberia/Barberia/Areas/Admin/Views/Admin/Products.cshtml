@@ -1,0 +1,133 @@
+﻿
+
+<div class="row mt-3">
+    <div class="col-md-12">
+        <h2 class="text-md-center mt-md-4">Catalogo de productos</h2>
+    </div>
+</div>
+
+
+<div class="row mt-5 align-items-center ">
+    <div class="col-md-2 ">
+        <h2>Registrar Producto</h2>
+        <div class="form-group">
+            <label> Producto</label>
+            <input type="text" class="form-control" id="pName">
+        </div>
+        <div class="form-group ">
+            <label>Marca:</label>
+            <select id="pBrand" class="form-control">
+                <option selected>Elija Marca:</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Typo:</label>
+            <select id="pType" class="form-control">
+                <option selected>Elija Tipo:</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Precio Venta</label>
+            <input  type="text" id="pPrice" class="form-control"/>
+        </div>
+        <label> Descripcion:</label>
+        <textarea rows="4" cols="50" id="pDescription" class="form-control"></textarea>
+        <div class="form-group">
+            <button type="submit" class="btn btn-info mt-1" id="btnCreateProduct">Registrar</button>
+        </div>
+ </div>
+
+    <div class="col-md-10 tableProduct">
+        <table class="table table-hover table-responsive " id="listProducts">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Producto</th>
+                    <th>Marca</th>
+                    <th>Tipo</th>
+                    <th>Descripcion</th>
+                    <th>Precio</th>
+                    <th>Existencia</th>
+                    <th>Accion</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+</div>
+
+
+<!-- Modal Eliminar Resgistro -->
+<div class="modal fade" id="modalDeleteProduct" tabindex="-1" role="dialog" aria-labelledby="modalDeleteLabelProduct">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ModalDeleteLabelProduct">Eliminar Producto</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h5 class="h5">¿Esta seguro de <strong> eliminar este registro?</strong></h5>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-danger" id="btnDeleteProduct" data-dismiss="modal">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<!-- Modal Actualizar Registro-->
+<div class="modal fade" id="modalUpdateProduct" tabindex="-1" role="dialog" aria-labelledby="modalUpdateLabelProduct">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalUpdatelLabelProduct">Formulario Modificacion de Producto</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label> Producto</label>
+                            <input type="text" class="form-control" id="paName">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Marca:</label>
+                            <select id="paBrand" class="form-control">
+                                <option selected>Elija Marca:</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>Typo:</label>
+                            <select id="paType" class="form-control">
+                                <option selected>Elija Tipo:</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Precio Venta</label>
+                            <input type="text" id="paPrice" class="form-control" />
+                        </div>
+                    </div>
+                        <div class="form-group">
+                            <label>Existencia</label>
+                            <input type="text" id="paQuantity" class="form-control" />
+                        </div>
+                        <label> Descripcion:</label>
+                        <textarea rows="4" cols="50" id="paDescription" class="form-control"></textarea>
+               </form>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-warning" id="btnUpdateProduct">Actualizar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

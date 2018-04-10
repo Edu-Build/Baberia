@@ -1,0 +1,197 @@
+﻿<div class="row">
+    <div class="col-md-12">
+        <h2 class="text-md-center mt-md-4">Catalogo ventas de servios con reservaciones</h2>
+    </div>
+</div>
+
+<table class="table table-hover table-responsive" id="listSaleReservation">
+    <thead>
+        <tr>
+            <th>No</th>
+            <th>Cliente</th>
+            <th>Sevicio</th>
+            <th>Tienda</th>
+            <th>Empleado</th>
+            <th>Fecha Registro</th>
+            <th>Decuento</th>
+            <th>Total</th>
+            <th>Accion</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <h2 class="text-md-center mt-md-4">Catalogo ventas de servios</h2>
+    </div>
+</div>
+
+<table class="table table-hover table-responsive" id="listSale">
+    <thead>
+        <tr>
+            <th>No</th>
+            <th>Sevicio</th>
+            <th>Tienda</th>
+            <th>Empleado</th>
+            <th>Fecha Registro</th>
+            <th>Decuento</th>
+            <th>Total</th>
+            <th>Accion</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Modal Resgistro ventas con reservacion -->
+<div class="modal fade" id="modalRegisterReservation" tabindex="-1" role="dialog" aria-labelledby="modalRegisterLabelReservation">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ModalRegisterLabelReservation">Eliminar Registro</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h5 class="h5">¿Esta seguro de <strong> eliminar este registro?</strong></h5>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-danger" id="btnDeletesrRegister" data-dismiss="modal">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+
+<!-- Modal Actualizar Registro ventas con reservacion-->
+<div class="modal fade" id="modalUpdatesrReservation" tabindex="-1" role="dialog" aria-labelledby="modalUpdateLabelsrReservation">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalUpdatelLabelReservation">Formulario Modificacion de registro</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>Reservacion</label>
+                            <select id="srReservation" class="form-control">
+                                <option selected>Reservacion a nombre de:</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>Empleado</label>
+                            <select id="srEmploye" class="form-control">
+                                <option selected>Elija Empleado:</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Total</label>
+                            <div>
+                                <input type="text" id="srPay" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-warning" id="btnUpdatesrRegister">Actualizar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<!-- Modal Resgistro ventas  -->
+<div class="modal fade" id="modalDeletessRegister" tabindex="-1" role="dialog" aria-labelledby="modalRegisterLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ModalRegisterLabel">Eliminar Registro</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h5 class="h5">¿Esta seguro de <strong> eliminar este registro?</strong></h5>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-danger" id="btnDeletessRegister" data-dismiss="modal">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<!-- Modal Actualizar Registro ventas -->
+<div class="modal fade" id="modalUpdatessRegister" tabindex="-1" role="dialog" aria-labelledby="modalUpdateLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalUpdatelLabel">Formulario Modificacion de registro</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>Servicio</label>
+                            <select id="ssService" class="form-control">
+                                <option selected>Elija servicio:</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Tienda</label>
+                            <select id="ssStore" class="form-control">
+                                <option selected>Elija Tienda:</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>Empleado</label>
+                            <select id="ssEmploye" class="form-control">
+                                <option selected>Elija Empleado:</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Total</label>
+                            <div>
+                                <input type="text" id="ssPay" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-warning" id="btnUpdatessRegister">Actualizar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
