@@ -299,6 +299,16 @@
     <Content Include="Images\Logo.svg" />
     <Content Include="Images\Muestra.png" />
     <Content Include="Images\Servicio.jpg" />
+    <Content Include="Images\Servicios\15534919_1802793306638359_6307537457067851776_n.jpg" />
+    <Content Include="Images\Servicios\afeitado-737x416.jpg" />
+    <Content Include="Images\Servicios\Barba Cut.jpg" />
+    <Content Include="Images\Servicios\barber-4-1.jpg" />
+    <Content Include="Images\Servicios\Barberia.jpeg" />
+    <Content Include="Images\Servicios\barberia2.jpg" />
+    <Content Include="Images\Servicios\Corte-de-Barba1.jpg" />
+    <Content Include="Images\Servicios\lumberjack_01.jpg" />
+    <Content Include="Images\Servicios\Navaja.jpg" />
+    <Content Include="Images\Servicios\toalla-caliente-barbería.jpg" />
     <Content Include="MisEstilos\Calendario.css" />
     <Content Include="MisEstilos\gijgo.css" />
     <Content Include="MisEstilos\misEstilos.css" />

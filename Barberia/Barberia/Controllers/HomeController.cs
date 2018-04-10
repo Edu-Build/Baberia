@@ -36,14 +36,14 @@ namespace Barberia.Controllers
             smtp.Port = 587;
             smtp.EnableSsl = true;
             smtp.Host = "outlook.office365.com";
-            smtp.Credentials = new NetworkCredential("eduardo.ibarra@my.unitec.edu.mx", "####");
+            smtp.Credentials = new NetworkCredential("thepepesbarber@hotmail.com", "@Adminpepes123");
             MailMessage mail = new MailMessage();
             mail.To.Add(e);
             mail.To.Add("edu.music.ei@gmail.com");
             mail.Subject = "Reservacion realizada Exitosamente dentro del proyecto";
-            mail.Body = "<h1>Prueba</h1>";
+            mail.Body = "<h1>Gracias por hacer tu reservacion con nosootros, no te vas arrepentir</h1>";
             mail.IsBodyHtml = true;
-            mail.From = new MailAddress("eduardo.ibarra@my.unitec.edu.mx", "Eduardo Ibarra A");
+            mail.From = new MailAddress("thepepesbarber@hotmail.com", "The pepes Barber");
 
             try
             {
