@@ -250,7 +250,7 @@
                 register.idService = $('#ssService').val()
                 register.idStore = $('#ssStore').val()
                 register.idEmploye = $('#ssEmploye').val()
-                register.discount = $('#ssDiscount').val()
+                register.discount = 0
                 register.total = $('#ssPay').val()
 
                 console.log(register)
@@ -299,7 +299,7 @@
                 registerSale.idReservation = $('#srReservation').val()
                 registerSale.idEmploye = $('#srEmploye').val()
                 registerSale.idService = $('#srService').val()
-                registerSale.discount = $('#srDiscount').val()
+                registerSale.discount = 0
                 registerSale.total= $('#srPay').val()
                 
                 createReservation(JSON.stringify(registerSale))
@@ -1715,13 +1715,7 @@
                         'text': 'Reporte Excel',
                         'titleAttr': 'Excel'
 
-                    },
-                     {
-                         'extend': 'pdfHtml5',
-                         'text': 'Reporte PDF',
-                         'titleAttr': 'pdf'
-
-                     }
+                    }
                 ],
                 'language': traduccion_espaniol
 
@@ -1839,13 +1833,7 @@
                         'text': 'Reporte Excel',
                         'titleAttr': 'Excel'
 
-                    },
-                     {
-                         'extend': 'pdfHtml5',
-                         'text': 'Reporte PDF',
-                         'titleAttr': 'pdf'
-
-                     }
+                    }
                 ],
                 'language': traduccion_espaniol
 
