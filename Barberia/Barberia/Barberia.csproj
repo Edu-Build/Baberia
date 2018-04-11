@@ -301,14 +301,18 @@
     <Content Include="Images\Servicio.jpg" />
     <Content Include="Images\Servicios\15534919_1802793306638359_6307537457067851776_n.jpg" />
     <Content Include="Images\Servicios\afeitado-737x416.jpg" />
-    <Content Include="Images\Servicios\Barba Cut.jpg" />
+    <Content Include="Images\Servicios\BarbaCut.jpg" />
     <Content Include="Images\Servicios\barber-4-1.jpg" />
     <Content Include="Images\Servicios\Barberia.jpeg" />
     <Content Include="Images\Servicios\barberia2.jpg" />
+    <Content Include="Images\Servicios\cabeza.jpg" />
     <Content Include="Images\Servicios\Corte-de-Barba1.jpg" />
+    <Content Include="Images\Servicios\Jr.jpg" />
     <Content Include="Images\Servicios\lumberjack_01.jpg" />
     <Content Include="Images\Servicios\Navaja.jpg" />
+    <Content Include="Images\Servicios\recortar_el_bigote_de_manera_facil-min.jpg" />
     <Content Include="Images\Servicios\toalla-caliente-barbería.jpg" />
+    <Content Include="Images\Slider\IMG_2352-iloveimg-resized.jpg" />
     <Content Include="MisEstilos\Calendario.css" />
     <Content Include="MisEstilos\gijgo.css" />
     <Content Include="MisEstilos\misEstilos.css" />
@@ -453,7 +457,6 @@
     <Folder Include="Areas\ApiRest\Views\Shared\" />
     <Folder Include="Areas\ApiRest\Views\StoreCatalog\" />
     <Folder Include="Areas\ApiRest\Views\Users\" />
-    <Folder Include="Images\Slider\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
