@@ -382,8 +382,8 @@ ul.gj-list-md li.disabled > [data-role=wrapper] > [data-role=display] {
 
 @font-face {
     font-family: gijgo-material;
-    src: url(../Fonts/Calendario/gijgo-material.eot?235541);
-    src: url(../Fonts/Calendario/gijgo-material.eot?235541#iefix) format('embedded-opentype'), url(../Fonts/Calendario/gijgo-material.ttf?235541) format('truetype'), url(../Fonts/Calendario/gijgo-material.woff?235541) format('woff'), url(../Fonts/Calendario/gijgo-material.svg?235541#gijgo-material) format('svg');
+    src: url(../Fonts/fonts/gijgo-material.eot?235541);
+    src: url(../Fonts/fonts/gijgo-material.eot?235541#iefix) format('embedded-opentype'), url(../Fonts/fonts/gijgo-material.ttf?235541) format('truetype'), url(../Fonts/fonts/gijgo-material.woff?235541) format('woff'), url(../Fonts/fonts/gijgo-material.svg?235541#gijgo-material) format('svg');
     font-weight: 400;
     font-style: normal
 }
